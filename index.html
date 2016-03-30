@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,8 +102,7 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -121,27 +120,26 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>This is the <a href="http://www.adrapid.com">AdRapid</a> public API v1.0 documentation</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<h3 id="api-url">API URL</h3>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>The base URL for all API request is <code class="prettyprint">http://api.adrapid.com/</code>. A set of public methods are available as specified in this document.</p>
 
 <h1 id="authentication">Authentication</h1>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://platform.adrapid.com/api/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
 </code></pre>
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
+curl http://platform.adrapid.com/api/
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
@@ -149,97 +147,310 @@ curl <span class="s2">"api_endpoint_here"</span>
 <p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Each client has an private API-key as well as an public API-key. Every template/project
+has its own unique API-key. The private client API-key should never be send in itself,
+but is used for generating authentication tokens. The public client API-key is used for
+authentication by some API methods.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p>You can register a new AdRapid API key at our <a href="http://adrapid.com/developers">developer portal</a>.</p>
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+          <h1 id="templates">Templates</h1>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>Templates are the basic structure from which a banner (also called <em>item</em>) can be generated.
+You start by getting the templates available for the current user, and
+later on you can send orders based on a given template.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h2 id="get-templates">Get templates</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://platform.adrapid.com/api/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getTemplates</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">templates</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Error getting templates'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Example result of calling the get templates method</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AdRapid product 1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adrapid-product00001"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/adrapid_product1_videothumbnail.jpg"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snowwq97a0l2fdabeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product snow"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mxm-product_snow"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/mxm-product_snow_videothumbnail.jpg"</span><span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"service-image_xbeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mxm-service_image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/mxm-service_image.jpg"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>Gets available templates for a given client.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">GET http://api.adrapid.com/templates</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h2 id="getting-rules-for-template">Getting rules for template</h2>
+
+<p>Get the rules for a given template.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/rules</code></p>
+
+<h3 id="url-parameters">URL parameters</h3>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>:id</td>
+<td>The ID of template.</td>
 </tr>
+</tbody></table>
+
+<h2 id="getting-available-formats-for-template">Getting available formats for template</h2>
+
+<p>Get the available formats for a given template.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/formats</code></p>
+
+<h3 id="url-parameters">URL parameters</h3>
+
+<table><thead>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of template.</td>
+</tr>
+</tbody></table>
+
+<h2 id="getting-dummy-content-for-template">Getting dummy content for template</h2>
+
+<blockquote>
+<p>Example fields:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"text_field1_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_2"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_8"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_8"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"tex,t_field1_9"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_9"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_10"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_field1_10"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_sign1_1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_sign1_2"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_sign1_3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_sign1_4"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign2_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_sign2_1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Returns an array of dummy content for the template&rsquo;s fields.
+Primarily intended for understanding the API/order structure or as dummy values
+for a template preview.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/dummy</code></p>
+
+<h3 id="url-parameters">URL parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of template.</td>
+</tr>
+</tbody></table>
+
+<h2 id="retrieving-template-preview">Retrieving template preview</h2>
+
+<p>It is also possible to retrieve a quick preview of a template before actually sending
+a time consuming order.</p>
+
+<p>Returns a html preview.</p>
+
+<aside class="warning">Currently autentication is not implemented.</aside>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/preview</code></p>
+
+<h3 id="url-parameters">URL parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of template.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="orders">Orders</h1>
+
+<p>Orders are used to generate the banners (items) from a given template. Orders are long
+running processes that their completion time depends on many factors, such as number
+of items, complexity, image quality, etc.</p>
+
+<p>AdRapid will run orders in an optimized parallel engine that will be able to quickly render the
+results in typically less than one minute.</p>
+
+<h2 id="send-order">Send Order</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">order</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"templateId"</span><span class="p">:</span> <span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span>
+  <span class="s2">"formats"</span><span class="p">:</span> <span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span> <span class="s2">"text_field1_1"</span><span class="p">:</span> <span class="s2">"Sony Xperia Z3"</span><span class="p">,</span>
+  <span class="s2">"text_field1_2"</span><span class="p">:</span> <span class="s2">"The brand new"</span><span class="p">,</span>
+  <span class="s2">"text_field1_3"</span><span class="p">:</span> <span class="s2">"city mobile"</span><span class="p">,</span>
+  <span class="s2">"text_field1_7"</span><span class="p">:</span> <span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span> <span class="s2">"text_sign2_1"</span><span class="p">:</span> <span class="s2">"$199"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_2"</span><span class="p">:</span> <span class="s2">"Org. price $399"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_4"</span><span class="p">:</span> <span class="s2">"NOW!"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_3"</span><span class="p">:</span> <span class="s2">"Buy now!"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_1"</span><span class="p">:</span> <span class="s2">"XPERIA Z3"</span><span class="p">,</span>
+  <span class="s2">"text_field1_4"</span><span class="p">:</span> <span class="s2">"Waterproof"</span><span class="p">,</span>
+  <span class="s2">"text_field1_5"</span><span class="p">:</span> <span class="s2">"5.2-inch 4K screen"</span><span class="p">,</span>
+  <span class="s2">"text_field1_6"</span><span class="p">:</span> <span class="s2">"920 standby hours"</span><span class="p">,</span>
+  <span class="s2">"img_1"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/product.png"</span><span class="p">,</span>
+  <span class="s2">"img_2"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/logo.png"</span><span class="p">,</span>
+  <span class="s2">"img_3"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/background.jpg"</span><span class="p">,</span> <span class="s2">"color_background1"</span><span class="p">:</span> <span class="s2">"#3399ff"</span><span class="p">,</span>
+  <span class="s2">"color_sign1"</span><span class="p">:</span> <span class="s2">"#ff6600"</span><span class="p">,</span>
+  <span class="s2">"color_text_field1"</span><span class="p">:</span> <span class="s2">"#333333"</span><span class="p">,</span>
+  <span class="s2">"color_text_sign1"</span><span class="p">:</span> <span class="s2">"#3344ff"</span><span class="p">,</span>
+  <span class="s2">"client_data"</span><span class="p">:</span> <span class="s2">"my own ID"</span><span class="p">,</span>
+  <span class="s2">"callback_url"</span><span class="p">:</span> <span class="s2">"http://my-site.com/order_callback.php"</span>
+<span class="p">}</span>
+
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">sendOrder</span><span class="p">(</span><span class="nx">order</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">orderId</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'order sent with id:'</span><span class="p">,</span> <span class="nx">orderId</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'order failed'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<pre class="highlight shell"><code>curl -d @order.json --header <span class="s2">"Content-Type:application/json"</span> <span class="s2">"http://api.adrapid.com/orders"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
+
+<p>This endpoint posts an order to generate a set of banners based on a given template data.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST http://api.adrapid.com/orders</code></p>
+
+<p>Returns an order ID that can be used by other APIs to retrieve order status and events.</p>
+
+<h3 id="mandatory-body-parameters">Mandatory Body parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>templateId</td>
+<td>The ID of template to use for the order.</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Hint: use the Events API to retrieve real time status of your order!
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="sending-images">Sending images</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Images can be send as either a <em>URL</em>, raw binary data (ie. as standard &ldquo;HTTP post&rdquo;), or as a <em>base64-encoded</em> string.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<blockquote>
+<p>All these color examples are valid:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"color_background1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#3399ff"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color_sign1"</span><span class="p">:</span><span class="w">       </span><span class="s2">"hsl(200,10,20)"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color_text_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rgba(100, 250, 0, 0.55)"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"color_text_sign1"</span><span class="p">:</span><span class="w">  </span><span class="s2">"cmyk(1, 2, 3, 4)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="sending-colors">Sending colors</h3>
+
+<p>Colors can be send in HEX, rgb(a), CMYK or HSL.</p>
+
+<h3 id="setting-banner-video-formats-for-order">Setting banner/video formats for order</h3>
+
+<p>Order formats are determined by format strings. The formats string should contain a set of
+order items, separated by commas. Each item is named by its format, separated by an underscore,
+followed by the size or identifier.</p>
+
+<p>For example banner_320x160 and video_horizontal_15s ar valid formats. Some formats string examples:</p>
+
+<p><code class="prettyprint">banner_980x240, banner_300x1050:google_adwords, video_horizontal_15s</code></p>
+
+<p>Available formats for a given template could be retrieved using the <em>get template formats</em> API.</p>
+
+<h3 id="include-custom-data-and-returning-via-a-callback-url">Include custom data and returning via a callback url</h3>
+
+<p>Order requests may contain own <code class="prettyprint">client_data</code>, which if included will be passed through
+the order and returned in the request to given <code class="prettyprint">callback_url</code>.</p>
+
+<p><code class="prettyprint">client_data</code>, may contain any string, such as any valid an json object. When the order is completed,
+a request is made to the url specified in the <code class="prettyprint">callback_url</code>, containing the order ID as well as
+the <code class="prettyprint">client_data</code> string.</p>
+
+<h2 id="get-order">Get order</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://platform.adrapid.com/api/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
+
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getOrder</span><span class="p">(</span><span class="nx">orderId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/orders/</span><span class="nv">$MY_ORDER_ID</span><span class="s2">"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
@@ -247,21 +458,13 @@ Remember — a happy kitten is an authenticated kitten!
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rendering"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Gets the details of an order. Useful to get the status of a given order.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code class="prettyprint">GET http://api.adrapid.com/orders/:id</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -272,16 +475,85 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>id</td>
+<td>id of the order we want to retrieve its data.</td>
 </tr>
 </tbody></table>
 
+          <h1 id="events">Events</h1>
+
+<p>Events are generated through Server Sent Events (SSE:s). This enable tracking orders in real time
+and display them on the browser as they are completed.</p>
+
+<h2 id="watching-order-events">Watching order events</h2>
+
+<blockquote>
+<p>item_complete event:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asft"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300x300"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>order_complete event:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight javascript"><code><span class="c1">//</span>
+<span class="c1">// Vanilla javascript example</span>
+<span class="c1">//</span>
+
+<span class="kd">function</span> <span class="nx">watch_order</span><span class="p">(</span><span class="nx">order_id</span><span class="p">,</span> <span class="nx">api_key</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">//</span>
+  <span class="c1">// setup &amp; initialize the EventSource</span>
+  <span class="c1">//</span>
+  <span class="kd">var</span> <span class="nx">base_url</span>    <span class="o">=</span> <span class="s1">'http://api.adrapid.com/events/order'</span><span class="p">,</span>
+      <span class="nx">token</span>       <span class="o">=</span> <span class="nx">generate_token</span><span class="p">(</span><span class="nx">api_key</span><span class="p">),</span>
+      <span class="nx">evt_url</span>     <span class="o">=</span> <span class="nx">base_url</span> <span class="o">+</span> <span class="nx">order_id</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
+      <span class="nx">evtSource</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="nx">evt_url</span><span class="p">);</span>
+
+  <span class="c1">//</span>
+  <span class="c1">// listen to eventsource events</span>
+  <span class="c1">//</span>
+
+  <span class="c1">//</span>
+  <span class="c1">// show items as they are completed</span>
+  <span class="c1">//</span>
+  <span class="nx">evtSource</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"item_complete"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// parse json data to array</span>
+      <span class="nx">show_banner</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span> <span class="c1">// show result using a custom function</span>
+  <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+
+  <span class="c1">//</span>
+  <span class="c1">// show an message when all order items have been completed</span>
+  <span class="c1">//</span>
+  <span class="nx">evtSource</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'order_complete'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">order</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s1">'Successfully completed order #'</span> <span class="o">+</span> <span class="nx">order</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">);</span>
+  <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Use the following endpoint to watch for order events. The endpoint emits two events: <em>item_complete</em> and <em>order_complete</em>.</p>
+
+<h3 id="sse-endpoint">SSE Endpoint</h3>
+
+<p><code class="prettyprint">http://api.adrapid.com/events/order/:id/:token</code></p>
+
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+<aside class="notice">
+These are generic errors that can be returned by any of the API calls provided in this reference.
+For more specific errors check every API call documentation.
+</aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>The AdRapid API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -291,11 +563,11 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td>Bad Request &ndash; Your request is invalid</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td>Unauthorized &ndash; Your API/Token key is incorrect</td>
 </tr>
 <tr>
 <td>403</td>
@@ -303,27 +575,11 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td>Not Found &ndash; The specified resource could not be found</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests &ndash; Too many requests</td>
 </tr>
 <tr>
 <td>500</td>
@@ -339,8 +595,7 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
