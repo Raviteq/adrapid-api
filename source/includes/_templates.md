@@ -82,7 +82,7 @@ Parameter | Description
 id | The ID of template.
 
 
-## Getting dummy content for template
+## Getting default content for template
 
 > Example fields:
 
@@ -103,13 +103,13 @@ id | The ID of template.
 }
 ```
 
-Returns an array of dummy content for the template's fields.
-Primarily intended for understanding the API/order structure or as dummy values
+Returns an array of default content for the template's fields.
+Primarily intended for understanding the API/order structure or as default values
 for a template preview.
 
 ### HTTP Request
 
-`GET http://api.adrapid.com/templates/:id/dummy`
+`GET http://api.adrapid.com/templates/:id/defaults`
 
 
 ### URL parameters
