@@ -252,7 +252,7 @@ later on you can send orders based on a given template.</p>
 </tr>
 </tbody></table>
 
-<h2 id="getting-dummy-content-for-template">Getting dummy content for template</h2>
+<h2 id="getting-default-content-for-template">Getting default content for template</h2>
 
 <blockquote>
 <p>Example fields:</p>
@@ -273,13 +273,13 @@ later on you can send orders based on a given template.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Returns an array of dummy content for the template&rsquo;s fields.
-Primarily intended for understanding the API/order structure or as dummy values
+<p>Returns an array of default content for the template&rsquo;s fields.
+Primarily intended for understanding the API/order structure or as default values
 for a template preview.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/dummy</code></p>
+<p><code class="prettyprint">GET http://api.adrapid.com/templates/:id/defaults</code></p>
 
 <h3 id="url-parameters">URL parameters</h3>
 
@@ -458,7 +458,13 @@ the <code class="prettyprint">client_data</code> string.</p>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rendering"</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rendering"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -493,7 +499,8 @@ and display them on the browser as they are completed.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asft"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300x300"</span><span class="w">
+    </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300x300"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -501,7 +508,13 @@ and display them on the browser as they are completed.</p>
 <p>order_complete event:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code><span class="c1">//</span>
