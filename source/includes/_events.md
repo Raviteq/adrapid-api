@@ -12,7 +12,8 @@ and display them on the browser as they are completed.
 {
     "id": "1234",
     "type": "asft",
-    "format": "300x300"
+    "format": "300x300",
+    "url": "orders.adrapid.com/:orderId/:itemId"
 }
 ```
 
@@ -20,7 +21,13 @@ and display them on the browser as they are completed.
 
 ```json
 {
-    "id": "123"
+    "id": "123",
+    "items": [
+     {
+      "id" : "1234",
+      "url": "orders.adrapid.com/:orderId/:itemId"
+     }
+    ]
 }
 ```
 

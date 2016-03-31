@@ -135,7 +135,13 @@ curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
 
 ```json
 {
-    "status": "rendering"
+    "status": "rendering",
+    "items": [
+     {
+      "id" : "1234",
+      "url": "orders.adrapid.com/:orderId/:itemId"
+     }
+    ]
 }
 ```
 
