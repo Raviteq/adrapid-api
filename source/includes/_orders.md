@@ -72,7 +72,7 @@ Hint: use the Events API to retrieve real time status of your order!
 
 ### Sending images
 
-Images can be sent as either a *URL*, raw binary data (ie. as standard "HTTP post"), or as a *base64-encoded* string.
+Images can be send as either a *URL*, raw binary data (ie. as standard "HTTP post"), or as a *base64-encoded* string.
 
 > All these color examples are valid:
 
@@ -86,18 +86,18 @@ Images can be sent as either a *URL*, raw binary data (ie. as standard "HTTP pos
 ```
 ### Sending colors
 
-Colors can be sent in HEX, rgb(a), CMYK or HSL.
+Colors can be send in HEX, rgb(a), CMYK or HSL.
 
 
 ### Setting banner/video formats for order
 
-Order formats are determined by the string formats. The formats string should contain a set of
+Order formats are determined by format strings. The formats string should contain a set of
 order items, separated by commas. Each item is named by its format, separated by an underscore,
 followed by the size or identifier.
 
 For example banner_320x160 and video_horizontal_15s ar valid formats. Some formats string examples:
 
-`banner_980x240,banner_300x1050:google_adwords,video_horizontal_15s`
+`banner_980x240, banner_300x1050:google_adwords, video_horizontal_15s`
 
 Available formats for a given template could be retrieved using the *get template formats* API.
 
