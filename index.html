@@ -230,6 +230,61 @@ later on you can send orders based on a given template.</p>
 </tr>
 </tbody></table>
 
+<blockquote>
+<p>Example result of calling the get template rules method</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6066cd7b8712507a5b0d547aa64c370a91ac3f91"</span><span class="err">.</span><span class="w">
+   </span><span class="s2">"name"</span><span class="err">:</span><span class="s2">"demo-phones"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"120x600"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"160x600"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"200x200"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"240x400"</span><span class="w">
+   </span><span class="p">],</span><span class="w">
+   </span><span class="nt">"fields"</span><span class="p">:[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"text_field1_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product name"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"AdRapid Phone"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"text_sign2_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Price"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"$399"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"img_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"http:\/\/platform.adrapid.com\/uploads\/client_uploads\/demo\/img\/b73f2d_ebf9_phone1024x1024.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"img_2"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product logo"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"http:\/\/platform.adrapid.com\/cache\/dummy_default\/logos-demo-mobile_pads\/adrapid_white.png"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"color_background1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Background color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"#b8594c"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"color_texts"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Text color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"#ffffff"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <h2 id="getting-available-formats-for-template">Getting available formats for template</h2>
 
 <p>Get the available formats for a given template.</p>
