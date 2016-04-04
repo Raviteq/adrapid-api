@@ -1,8 +1,10 @@
 # Templates
 
-Templates are the basic structure from which a banner (also called *item*) can be generated.
-You start by getting the templates available for the current user, and
-later on you can send orders based on a given template.
+Templates are the basic structure from which a banner or other type of
+supported output media(also called *item*) can be generated.
+You start by getting the all templates available for the current user, then select the
+proper one as well as its rules and supported formats and finally you can you can
+send orders based on the given template.
 
 ## Get templates
 
@@ -53,25 +55,11 @@ Gets available templates for a given client.
 
 ## Getting rules for template
 
-Get the rules for a given template.
-
-### HTTP Request
-
-`GET http://api.adrapid.com/templates/:id/rules`
-
-
-### URL parameters
-
-Parameter | Description
---------- | -----------
-:id | The ID of template.
-
-
 > Example result of calling the get template rules method
 
 ```json
 {
-   "id": "6066cd7b8712507a5b0d547aa64c370a91ac3f91".
+   "id": "6066cd7b8712507a5b0d547aa64c370a91ac3f91",
    "name":"demo-phones",
    "formats": [
       "120x600",
@@ -122,6 +110,28 @@ Parameter | Description
 }
 ```
 
+Get the rules for a given template. The rules of a template defines which
+datatypes are allowed for every field available in the template, as well as
+which are the supported output formats.
+
+The following table shows the available field types:
+
+type | Description
+--------- | -----------
+text | A string of text of a maximum length
+image | A URL specifying a image
+color | A valid color specification
+
+### HTTP Request
+
+`GET http://api.adrapid.com/templates/:id/rules`
+
+
+### URL parameters
+
+Parameter | Description
+--------- | -----------
+:id | The ID of template.
 
 ## Getting available formats for template
 

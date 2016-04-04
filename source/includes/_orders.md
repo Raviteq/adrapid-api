@@ -145,7 +145,10 @@ curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
 }
 ```
 
-Gets the details of an order. Useful to get the status of a given order.
+Gets the details of an order. Useful to get the status of a given order as well
+as the urls for the results. The urls are short lived and should be used by the
+client of the API just to copy them to a proper server. The contents of the order
+urls are only guaranteed to exist 24 hours after the order has been executed.
 
 `GET http://api.adrapid.com/orders/:id`
 
