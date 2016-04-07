@@ -148,42 +148,6 @@ Parameter | Description
 id | The ID of template.
 
 
-## Getting default content for template
-
-> Example fields:
-
-```json
-{
-  "text_field1_1": "text_field1_1",
-  "text_field1_2": "text_field1_2",
-  "text_field1_3": "text_field1_3",
-  "text_field1_4": "text_field1_4",
-  "text_field1_8": "text_field1_8",
-  "tex,t_field1_9": "text_field1_9",
-  "text_field1_10": "text_field1_10",
-  "text_sign1_1": "text_sign1_1",
-  "text_sign1_2": "text_sign1_2",
-  "text_sign1_3": "text_sign1_3",
-  "text_sign1_4": "text_sign1_4",
-  "text_sign2_1": "text_sign2_1"
-}
-```
-
-Returns an array of default content for the template's fields.
-Primarily intended for understanding the API/order structure or as default values
-for a template preview.
-
-### HTTP Request
-
-`GET http://api.adrapid.com/templates/:id/defaults`
-
-
-### URL parameters
-
-Parameter | Description
---------- | -----------
-id | The ID of template.
-
 
 ## Retrieving template preview
 
