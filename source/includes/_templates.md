@@ -133,21 +133,6 @@ Parameter | Description
 --------- | -----------
 :id | The ID of template.
 
-## Getting available formats for template
-
-Get the available formats for a given template.
-
-### HTTP Request
-
-`GET http://api.adrapid.com/templates/:id/formats`
-
-### URL parameters
-
-Parameter | Description
---------- | -----------
-id | The ID of template.
-
-
 
 ## Retrieving template preview
 
