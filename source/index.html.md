@@ -18,7 +18,7 @@ includes:
 search: true
 ---
 
-# Introduction
+# Introduction 
 
 This is the [AdRapid](http://www.adrapid.com) public API v1.0 documentation
 
@@ -31,7 +31,7 @@ The base URL for all API request is `http://api.adrapid.com/`. A set of public m
 
 ```javascript
 var adrapid = require('adrapid')({
-  url: 'http://platform.adrapid.com/api/',
+  url: 'http://api.adrapid.com/',
   key: 'myAPIKey',
   token: 'mySecretToken'
 });
@@ -40,7 +40,7 @@ var adrapid = require('adrapid')({
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl http://platform.adrapid.com/api/
+curl http://api.adrapid.com/
   -H "Authorization: myAPIKey"
 ```
 

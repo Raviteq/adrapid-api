@@ -1,7 +1,7 @@
 # Templates
 
 Templates are the basic structure from which a banner or other type of
-supported output media(also called *item*) can be generated.
+supported output media (also called *item*) can be generated.
 You start by getting the all templates available for the current user, then select the
 proper one as well as its rules and supported formats and finally you can you can
 send orders based on the given template.
@@ -10,7 +10,7 @@ send orders based on the given template.
 
 ```javascript
 var adrapid = require('adrapid')({
-  url: 'http://platform.adrapid.com/api/',
+  url: 'http://api.adrapid.com/',
   key: 'my API key',
   token: 'my secret token'
 });
