@@ -30,19 +30,22 @@ adrapid.getTemplates().then(function(templates){
   "id": "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
   "name": "AdRapid product 1",
   "identifier": "adrapid-product00001",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/adrapid_product1_videothumbnail.jpg"
+  "thumbnail": "http://adrapid.com/img/template_thumbnails/adrapid_product1_videothumbnail.jpg",
+  "group": "product"
 },
 {
   "id": "snowwq97a0l2fdabeb02a79e877bb9bda7e502ae",
   "name": "Product snow",
   "identifier": "mxm-product_snow",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-product_snow_videothumbnail.jpg"
+  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-product_snow_videothumbnail.jpg",
+  "group": "product"
 },
 {
   "id": "service-image_xbeb02a79e877bb9bda7e502ae",
   "name": "Service image",
   "identifier": "mxm-service_image",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-service_image.jpg"
+  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-service_image.jpg",
+  "group": "real_estate"
 }]
 ```
 
