@@ -122,6 +122,16 @@
 
 <p>This is the <a href="http://www.adrapid.com">AdRapid</a> public API v1.0 documentation</p>
 
+<h3 id="basic-description-of-the-order-workflow">Basic description of the order workflow</h3>
+
+<p><code class="prettyprint">AdRapid</code> is a rendering platform used for rendering a variety of <code class="prettyprint">ads</code>. We support a number of <em>ad types</em> - these include <em>html5 banners</em>, <em>flash banners</em>, <em>video</em>, as well as <em>printed material</em>. The rendering platform is based around a concept of <code class="prettyprint">clients</code>, <code class="prettyprint">templates</code> and <code class="prettyprint">orders</code>. </p>
+
+<p>Every <code class="prettyprint">client</code> has access to a given set of <code class="prettyprint">templates</code>. A <code class="prettyprint">template</code> describes the overall layout of an ad. A template also contains a set of available <code class="prettyprint">ad formats</code>, for different types of ads as listed above. The end user supplies texts, images and colors, as well as the desired <code class="prettyprint">ad formats</code>, resulting in an <code class="prettyprint">order</code>. </p>
+
+<p>The resulting order is sent in an <code class="prettyprint">order request</code>, using the <code class="prettyprint">send order</code> method. An <code class="prettyprint">order request</code> must include the selected template, as well as the desired content (texts, colors, images).</p>
+
+<p>Orders may be tracked in real time using <em>server-sent events</em>. Alternatively, a request may also be sent to an URL of choice, if specified in the order request.</p>
+
 <h3 id="api-url">API URL</h3>
 
 <p>The base URL for all API requests is <code class="prettyprint">http://api.adrapid.com/</code>. A set of public methods are available as specified in this document.</p>
