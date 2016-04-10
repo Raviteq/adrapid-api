@@ -2,7 +2,7 @@
 
 Templates are the basic structure from which a banner or other type of
 supported output media (also called *item*) can be generated.
-You start by getting the all templates available for the current user, then select the
+You start by getting all the templates available for the current user, then select the
 proper one as well as its rules and supported formats and finally you can you can
 send orders based on the given template.
 
@@ -49,7 +49,21 @@ adrapid.getTemplates().then(function(templates){
 }]
 ```
 
-Gets available templates for a given client.
+Get available templates for a given client. Returns a list of available templates for the client with the supplied `public API key`.
+
+For each template, a `template ID`, `identifier`, `name` and `thumbnail` is supplied. The `template ID` is unique for the template, and must be included in the `order request` for identifying the selected template. 
+
+The `name` and `identifier` fields contain names of the template, which you may use internally as you wish - ie. for identifying templates or displaying readable template names to the end user.
+
+The `thumbnail` field contains a URL to a jpeg image which may be used for displaying a overview of the template in your UI.
+
+The `group` property describes the `content-type` required for the template. Our templates are designed for different use cases - for example, the fields/content required in a template for real estate ads will differ from the fields required in a template for producing online product ads.
+
+To get the rules for a specific template, call the `template rules` method, supplying the `template ID` to the method call.
+
+<aside class="success">
+Hint: use the `group` property to filter templates. For example, if your end user is an real estate agent, show only real_estate-templates!
+</aside>
 
 ### HTTP Request
 
@@ -89,13 +103,13 @@ Gets available templates for a given client.
          "name":"img_1",
          "label":"Product image",
          "type": "image",
-         "default":"http:\/\/platform.adrapid.com\/uploads\/client_uploads\/demo\/img\/b73f2d_ebf9_phone1024x1024.png"
+         "default":"http://platform.adrapid.com/uploads/client_uploads/demo/img/b73f2d_ebf9_phone1024x1024.png"
       },
       {
          "name":"img_2",
          "label":"Product logo",
          "type": "image",
-         "default":"http:\/\/platform.adrapid.com\/cache\/dummy_default\/logos-demo-mobile_pads\/adrapid_white.png"
+         "default":"http://platform.adrapid.com/cache/dummy_default/logos-demo-mobile_pads/adrapid_white.png"
       },
       {
          "name":"color_background1",
