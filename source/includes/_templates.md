@@ -21,7 +21,8 @@ var adrapid = require('adrapid')({
 });
 
 adrapid.getTemplates().then(function(templates){
-
+  // do something with our templates
+  console.log(templates);
 }, function(err){
   console.error('Error getting templates', err);
 });
@@ -32,25 +33,25 @@ adrapid.getTemplates().then(function(templates){
 
 ```json
 [{
-  "id": "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "name": "AdRapid product 1",
+  "id":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
+  "name":       "AdRapid product 1",
   "identifier": "adrapid-product00001",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/adrapid_product1_videothumbnail.jpg",
-  "group": "product"
+  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
+  "group":      "product"
 },
 {
-  "id": "snowwq97a0l2fdabeb02a79e877bb9bda7e502ae",
-  "name": "Product snow",
+  "id":         "snowwq97a0l2fdabeb02a79e877bb9bda7e502ae",
+  "name":       "Product snow",
   "identifier": "mxm-product_snow",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-product_snow_videothumbnail.jpg",
-  "group": "product"
+  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
+  "group":      "product"
 },
 {
-  "id": "service-image_xbeb02a79e877bb9bda7e502ae",
-  "name": "Service image",
+  "id":         "service-image_xbeb02a79e877bb9bda7e502ae",
+  "name":       "Service image",
   "identifier": "mxm-service_image",
-  "thumbnail": "http://adrapid.com/img/template_thumbnails/mxm-service_image.jpg",
-  "group": "real_estate"
+  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
+  "group":      "real_estate"
 }]
 ```
 
@@ -101,8 +102,8 @@ curl "http://api.adrapid.com/templates/$TEMPLATE_ID/rules"
 
 ```json
 {
-   "id": "6066cd7b8712507a5b0d547aa64c370a91ac3f91",
-   "name":"demo-phones",
+   "id":    "6066cd7b8712507a5b0d547aa64c370a91ac3f91",
+   "name":  "demo-phones",
    "formats": [
       "120x600",
       "160x600",
@@ -111,42 +112,42 @@ curl "http://api.adrapid.com/templates/$TEMPLATE_ID/rules"
    ],
    "fields":[
       {
-         "name":"text_field1_1",
-         "label":"Product name",
-         "type": "text",
-         "max_length":20,
-         "default":"AdRapid Phone"
+         "name":        "text_field1_1",
+         "label":       "Product name",
+         "type":        "text",
+         "max_length":  20,
+         "default":     "AdRapid Phone"
       },
       {
-         "name":"text_sign2_1",
-         "label":"Price",
-         "type": "text",
-         "max_length":6,
-         "default":"$399"
+         "name":        "text_sign2_1",
+         "label":       "Price",
+         "type":        "text",
+         "max_length":  6,
+         "default":     "$399"
       },
       {
-         "name":"img_1",
-         "label":"Product image",
-         "type": "image",
-         "default":"http://platform.adrapid.com/uploads/client_uploads/demo/img/b73f2d_ebf9_phone1024x1024.png"
+         "name":        "img_1",
+         "label":       "Product image",
+         "type":        "image",
+         "default":     "http://adrapid.com/image.png"
       },
       {
-         "name":"img_2",
-         "label":"Product logo",
-         "type": "image",
-         "default":"http://platform.adrapid.com/cache/dummy_default/logos-demo-mobile_pads/adrapid_white.png"
+         "name":        "img_2",
+         "label":       "Product logo",
+         "type":        "image",
+         "default":     "http://adrapid.com/image.png"
       },
       {
-         "name":"color_background1",
-         "label":"Background color",
-         "type": "color",
-         "default":"#b8594c"
+         "name":        "color_background1",
+         "label":       "Background color",
+         "type":        "color",
+         "default":     "#b8594c"
       },
       {
-         "name":"color_texts",
-         "label":"Text color",
-         "type": "color",
-         "default":"#ffffff"
+         "name":        "color_texts",
+         "label":       "Text color",
+         "type":        "color",
+         "default":     "#ffffff"
       }
    ]
 }

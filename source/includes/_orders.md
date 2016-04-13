@@ -17,26 +17,28 @@ var adrapid = require('adrapid')({
 });
 
 var order = {
-  "templateId": "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "formats": "banner_300x250,banner_300x60,banner_980x240", "text_field1_1": "Sony Xperia Z3",
-  "text_field1_2": "The brand new",
-  "text_field1_3": "city mobile",
-  "text_field1_7": "Valid until 14\/12\/14", "text_sign2_1": "$199",
-  "text_sign1_2": "Org. price $399",
-  "text_sign1_4": "NOW!",
-  "text_sign1_3": "Buy now!",
-  "text_sign1_1": "XPERIA Z3",
-  "text_field1_4": "Waterproof",
-  "text_field1_5": "5.2-inch 4K screen",
-  "text_field1_6": "920 standby hours",
-  "img_1": "http://my-site.com/img/product.png",
-  "img_2": "http://my-site.com/img/logo.png",
-  "img_3": "http://my-site.com/img/background.jpg", "color_background1": "#3399ff",
-  "color_sign1": "#ff6600",
-  "color_text_field1": "#333333",
-  "color_text_sign1": "#3344ff",
-  "client_data": "my own ID",
-  "callback_url": "http://my-site.com/order_callback.php"
+  "templateId":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
+  "formats":            "banner_300x250,banner_300x60,banner_980x240", "text_field1_1":      "Sony Xperia Z3",
+  "text_field1_2":      "The brand new",
+  "text_field1_3":      "city mobile",
+  "text_field1_7":      "Valid until 14/12/14",
+  "text_sign2_1":       "$199",
+  "text_sign1_2":       "Org. price $399",
+  "text_sign1_4":       "NOW!",
+  "text_sign1_3":       "Buy now!",
+  "text_sign1_1":       "XPERIA Z3",
+  "text_field1_4":      "Waterproof",
+  "text_field1_5":      "5.2-inch 4K screen",
+  "text_field1_6":      "920 standby hours",
+  "img_1":              "http://my-site.com/img/product.png",
+  "img_2":              "http://my-site.com/img/logo.png",
+  "img_3":              "http://my-site.com/img/background.jpg",
+  "color_background1":  "#3399ff",
+  "color_sign1":        "#ff6600",
+  "color_text_field1":  "#333333",
+  "color_text_sign1":   "#3344ff",
+  "client_data":        "my own ID",
+  "callback_url":       "http://my-site.com/order_callback.php"
 }
 
 adrapid.sendOrder(order).then(function(orderId){

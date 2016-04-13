@@ -44,8 +44,8 @@ The base URL for all API requests is `http://api.adrapid.com/`. A set of public 
 ```javascript
 var adrapid = require('adrapid')({
   url: 'http://api.adrapid.com/',
-  key: 'myAPIKey',
-  token: 'mySecretToken'
+  key: 'my API Key',
+  token: 'my secret token'
 });
 
 ```
@@ -56,16 +56,16 @@ curl http://api.adrapid.com/
   -H "Authorization: myAPIKey"
 ```
 
-> Make sure to replace `myAPIKey` and `mySecretToken` with your API key and token respectively.
+> Make sure to replace `my API Key` and `my secret token` with your API key and token respectively.
 
 Each client has an private API-key as well as an public API-key. Every template/project has an unique API-key/identifier. The private client API-key should never be send in itself, but is used for generating authentication tokens. Currently only the public client API-key is needed for authentication for most of the API methods.
 
 You can register for a new AdRapid API key at our [developer portal](http://adrapid.com/developers).
 
-<aside class="warning">Autentication is disabled for the `adrapiddemo` account. Only the `public key` needs to be provided in all API requests.</aside>
+<aside class="warning">Autentication is disabled for the `adrapiddemo` account - only the `public key` needs to be provided.</aside>
 
 <aside class="notice">
-You must replace <code>myAPIKey</code> and <code>mySecretToken</code> with your
+You must replace <code>my API Key</code> and <code>my secret token</code> with your
 personal API key and token respectively.
 </aside>
 
