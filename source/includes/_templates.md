@@ -8,6 +8,11 @@ send orders based on the given template.
 
 ## Get templates
 
+```shell
+curl "http://api.adrapid.com/templates"
+  -H "Authorization: my API key"
+```
+
 ```javascript
 var adrapid = require('adrapid')({
   url: 'http://api.adrapid.com/',
@@ -62,7 +67,7 @@ The `group` property describes the `content-type` required for the template. Our
 To get the rules for a specific template, call the `template rules` method, supplying the `template ID` to the method call.
 
 <aside class="success">
-Hint: use the `group` property to filter templates. For example, if your end user is an real estate agent, show only real_estate-templates!
+Hint: use the `group` property to filter templates client-side. 
 </aside>
 
 ### HTTP Request
@@ -71,6 +76,26 @@ Hint: use the `group` property to filter templates. For example, if your end use
 
 
 ## Getting rules for template
+
+```javascript
+var adrapid = require('adrapid')({
+  url: 'http://api.adrapid.com/',
+  key: 'my API key',
+  token: 'my secret token'
+});
+
+adrapid.getRules(templateId).then(function(rules){
+
+}, function(err){
+  console.error('Error getting templates', err);
+});
+
+```
+
+```shell
+curl "http://api.adrapid.com/templates/$TEMPLATE_ID/rules"
+  -H "Authorization: my API key"
+```
 
 > Example result of calling the get template rules method
 
@@ -127,16 +152,19 @@ Hint: use the `group` property to filter templates. For example, if your end use
 }
 ```
 
-Get the rules for a given template. The rules of a template defines which
-datatypes are allowed for every field available in the template, as well as
-which are the supported output formats.
+Get the rules for a given template. The rules of a template defines which datatypes are allowed for every field available in the template (texts, images, colors), as well as the supported output formats.
+
+Rules for maximum text length (total characters) is supplied for every text field.
+
+Images are resized to optimally fit the provided image area when rendering every banner, however, an optimal ratio is supplied in the rules for image fields. Images should preferably be provided in the largest resolution possible, especially when producing ads for printed materials.
+
 
 The following table shows the available field types:
 
 type | Description
 --------- | -----------
 text | A string of text of a maximum length
-image | A URL specifying a image
+image | An valid image
 color | A valid color specification
 
 ### HTTP Request
