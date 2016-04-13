@@ -161,7 +161,7 @@ curl http://api.adrapid.com/
 
 <p>You can register for a new AdRapid API key at our <a href="http://adrapid.com/developers">developer portal</a>.</p>
 
-<aside class="warning">Autentication is disabled for the `adrapiddemo` account. Only the `public key` needs to be provided in all API requests.</aside>
+<aside class="warning">Autentication is disabled for the `adrapiddemo` account - only the `public key` needs to be provided.</aside>
 
 <aside class="notice">
 You must replace <code>myAPIKey</code> and <code>mySecretToken</code> with your
@@ -177,6 +177,9 @@ proper one as well as its rules and supported formats and finally you can you ca
 send orders based on the given template.</p>
 
 <h2 id="get-templates">Get templates</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/templates"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
@@ -230,7 +233,7 @@ send orders based on the given template.</p>
 <p>To get the rules for a specific template, call the <code class="prettyprint">template rules</code> method, supplying the <code class="prettyprint">template ID</code> to the method call.</p>
 
 <aside class="success">
-Hint: use the `group` property to filter templates. For example, if your end user is an real estate agent, show only real_estate-templates!
+Hint: use the `group` property to filter templates client-side. 
 </aside>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -238,6 +241,22 @@ Hint: use the `group` property to filter templates. For example, if your end use
 <p><code class="prettyprint">GET http://api.adrapid.com/templates</code></p>
 
 <h2 id="getting-rules-for-template">Getting rules for template</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
+
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getRules</span><span class="p">(</span><span class="nx">templateId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">rules</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Error getting templates'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/templates/</span><span class="nv">$TEMPLATE_ID</span><span class="s2">/rules"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
 
 <blockquote>
 <p>Example result of calling the get template rules method</p>
@@ -294,9 +313,11 @@ Hint: use the `group` property to filter templates. For example, if your end use
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Get the rules for a given template. The rules of a template defines which
-datatypes are allowed for every field available in the template, as well as
-which are the supported output formats.</p>
+<p>Get the rules for a given template. The rules of a template defines which datatypes are allowed for every field available in the template (texts, images, colors), as well as the supported output formats.</p>
+
+<p>Rules for maximum text length (total characters) is supplied for every text field.</p>
+
+<p>Images are resized to optimally fit the provided image area when rendering every banner, however, an optimal ratio is supplied in the rules for image fields. Images should preferably be provided in the largest resolution possible, especially when producing ads for printed materials.</p>
 
 <p>The following table shows the available field types:</p>
 
@@ -312,7 +333,7 @@ which are the supported output formats.</p>
 </tr>
 <tr>
 <td>image</td>
-<td>A URL specifying a image</td>
+<td>An valid image</td>
 </tr>
 <tr>
 <td>color</td>
@@ -411,36 +432,36 @@ results in typically less than one minute.</p>
 <span class="p">});</span>
 </code></pre>
 <pre class="highlight shell"><code>curl -d @order.json --header <span class="s2">"Content-Type:application/json"</span> <span class="s2">"http://api.adrapid.com/orders"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
 </code></pre>
 
 <blockquote>
 <p>example order data</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"templateId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"text_field1_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sony Xperia Z3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The brand new"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"city mobile"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_7"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span><span class="w"> 
-  </span><span class="nt">"text_sign2_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$199"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_sign1_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Org. price $399"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_sign1_4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NOW!"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_sign1_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Buy now!"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_sign1_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"XPERIA Z3"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_4"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waterproof"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_5"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.2-inch 4K screen"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_6"</span><span class="p">:</span><span class="w"> </span><span class="s2">"920 standby hours"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"img_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-site.com/img/product.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"img_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-site.com/img/logo.png"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"img_3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-site.com/img/background.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"color_background1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#3399ff"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"color_sign1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#ff6600"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"color_text_field1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"color_text_sign1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#3344ff"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"callback_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://my-site.com/order_callback.php"</span><span class="w">
-  </span><span class="s2">"client_data"</span><span class="err">:</span><span class="w"> </span><span class="s2">"my own ID"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"templateId"</span><span class="p">:</span><span class="w">         </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w">            </span><span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"text_field1_1"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Sony Xperia Z3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_2"</span><span class="p">:</span><span class="w">      </span><span class="s2">"The brand new"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_3"</span><span class="p">:</span><span class="w">      </span><span class="s2">"city mobile"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_7"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"text_sign2_1"</span><span class="p">:</span><span class="w">       </span><span class="s2">"$199"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_2"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Org. price $399"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_4"</span><span class="p">:</span><span class="w">       </span><span class="s2">"NOW!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_3"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Buy now!"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_sign1_1"</span><span class="p">:</span><span class="w">       </span><span class="s2">"XPERIA Z3"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_4"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Waterproof"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_5"</span><span class="p">:</span><span class="w">      </span><span class="s2">"5.2-inch 4K screen"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"text_field1_6"</span><span class="p">:</span><span class="w">      </span><span class="s2">"920 standby hours"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"img_1"</span><span class="p">:</span><span class="w">              </span><span class="s2">"http://my-site.com/img/product.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"img_2"</span><span class="p">:</span><span class="w">              </span><span class="s2">"http://my-site.com/img/logo.png"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"img_3"</span><span class="p">:</span><span class="w">              </span><span class="s2">"http://my-site.com/img/background.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"color_background1"</span><span class="p">:</span><span class="w">  </span><span class="s2">"#3399ff"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"color_sign1"</span><span class="p">:</span><span class="w">        </span><span class="s2">"#ff6600"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"color_text_field1"</span><span class="p">:</span><span class="w">  </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"color_text_sign1"</span><span class="p">:</span><span class="w">   </span><span class="s2">"#3344ff"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"callback_url"</span><span class="p">:</span><span class="w">       </span><span class="s2">"http://my-site.com/order_callback.php"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"client_data"</span><span class="p">:</span><span class="w">        </span><span class="s2">"my own ID"</span><span class="p">,</span><span class="w">
 </span><span class="err">}</span><span class="w">
 </span></code></pre>
 
@@ -450,7 +471,7 @@ results in typically less than one minute.</p>
 
 <p><code class="prettyprint">POST http://api.adrapid.com/orders</code></p>
 
-<p>Returns an order ID that can be used by other APIs to retrieve order status and events.</p>
+<p>Returns an <code class="prettyprint">order ID</code> that can be used by other APIs to retrieve order status and events.</p>
 
 <h3 id="mandatory-body-parameters">Mandatory Body parameters</h3>
 
@@ -464,7 +485,15 @@ results in typically less than one minute.</p>
 <td>templateId</td>
 <td>The ID of template to use for the order.</td>
 </tr>
+<tr>
+<td>formats</td>
+<td>The requested formats, at least one valid ad format.</td>
+</tr>
 </tbody></table>
+
+<p>The required fields for the ad content is supplied by the <code class="prettyprint">template rules</code> method. No validation is required for text fields. However, produced ads will look empty if fields are missing, and texts will be clipped if they exceed the <code class="prettyprint">max_length</code> limit.</p>
+
+<p>Invalid or missing colors and images are simply ignored, and will not cause an error.</p>
 
 <aside class="success">
 Hint: use the Events API to retrieve real time status of your order!
@@ -491,7 +520,7 @@ Hint: use the Events API to retrieve real time status of your order!
 
 <h3 id="setting-banner-video-formats-for-order">Setting banner/video formats for order</h3>
 
-<p>Order formats are determined by format strings. The formats string should contain a set of
+<p>Order formats are determined by the <code class="prettyprint">formats</code> string. The formats string should contain a set of
 order items, separated by commas. Each item is named by its format, separated by an underscore,
 followed by the size or identifier.</p>
 
@@ -512,7 +541,7 @@ the <code class="prettyprint">client_data</code> string.</p>
 
 <h2 id="get-order">Get order</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
-  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://platform.adrapid.com/api/'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
   <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
   <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
 <span class="p">});</span>
@@ -524,7 +553,7 @@ the <code class="prettyprint">client_data</code> string.</p>
 <span class="p">});</span>
 </code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/orders/</span><span class="nv">$MY_ORDER_ID</span><span class="s2">"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
 </code></pre>
 
 <blockquote>
@@ -534,8 +563,10 @@ the <code class="prettyprint">client_data</code> string.</p>
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rendering"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
      </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w">     </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w">   </span><span class="s2">"banner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"980x240"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="w">
      </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
