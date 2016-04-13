@@ -143,8 +143,8 @@
 </blockquote>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
-  <span class="na">key</span><span class="p">:</span> <span class="s1">'myAPIKey'</span><span class="p">,</span>
-  <span class="na">token</span><span class="p">:</span> <span class="s1">'mySecretToken'</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API Key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
 <span class="p">});</span>
 
 </code></pre>
@@ -154,7 +154,7 @@ curl http://api.adrapid.com/
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">myAPIKey</code> and <code class="prettyprint">mySecretToken</code> with your API key and token respectively.</p>
+<p>Make sure to replace <code class="prettyprint">my API Key</code> and <code class="prettyprint">my secret token</code> with your API key and token respectively.</p>
 </blockquote>
 
 <p>Each client has an private API-key as well as an public API-key. Every template/project has an unique API-key/identifier. The private client API-key should never be send in itself, but is used for generating authentication tokens. Currently only the public client API-key is needed for authentication for most of the API methods.</p>
@@ -164,7 +164,7 @@ curl http://api.adrapid.com/
 <aside class="warning">Autentication is disabled for the `adrapiddemo` account - only the `public key` needs to be provided.</aside>
 
 <aside class="notice">
-You must replace <code>myAPIKey</code> and <code>mySecretToken</code> with your
+You must replace <code>my API Key</code> and <code>my secret token</code> with your
 personal API key and token respectively.
 </aside>
 
@@ -187,7 +187,8 @@ send orders based on the given template.</p>
 <span class="p">});</span>
 
 <span class="nx">adrapid</span><span class="p">.</span><span class="nx">getTemplates</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">templates</span><span class="p">){</span>
-
+  <span class="c1">// do something with our templates</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templates</span><span class="p">);</span>
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Error getting templates'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
 <span class="p">});</span>
@@ -198,25 +199,25 @@ send orders based on the given template.</p>
 <p>Example result of calling the get templates method</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">[{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AdRapid product 1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w">         </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"AdRapid product 1"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adrapid-product00001"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/adrapid_product1_videothumbnail.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w">  </span><span class="s2">"http://adrapid.com/thumbnail.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"group"</span><span class="p">:</span><span class="w">      </span><span class="s2">"product"</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snowwq97a0l2fdabeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Product snow"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w">         </span><span class="s2">"snowwq97a0l2fdabeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Product snow"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mxm-product_snow"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/mxm-product_snow_videothumbnail.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w">  </span><span class="s2">"http://adrapid.com/thumbnail.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"group"</span><span class="p">:</span><span class="w">      </span><span class="s2">"product"</span><span class="w">
 </span><span class="p">},</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"service-image_xbeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w">         </span><span class="s2">"service-image_xbeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Service image"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mxm-service_image"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://adrapid.com/img/template_thumbnails/mxm-service_image.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"group"</span><span class="p">:</span><span class="w"> </span><span class="s2">"real_estate"</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w">  </span><span class="s2">"http://adrapid.com/thumbnail.jpg"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"group"</span><span class="p">:</span><span class="w">      </span><span class="s2">"real_estate"</span><span class="w">
 </span><span class="p">}]</span><span class="w">
 </span></code></pre>
 
@@ -262,8 +263,8 @@ Hint: use the `group` property to filter templates client-side.
 <p>Example result of calling the get template rules method</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6066cd7b8712507a5b0d547aa64c370a91ac3f91"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"demo-phones"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"id"</span><span class="p">:</span><span class="w">    </span><span class="s2">"6066cd7b8712507a5b0d547aa64c370a91ac3f91"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"name"</span><span class="p">:</span><span class="w">  </span><span class="s2">"demo-phones"</span><span class="p">,</span><span class="w">
    </span><span class="nt">"formats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="s2">"120x600"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"160x600"</span><span class="p">,</span><span class="w">
@@ -272,42 +273,42 @@ Hint: use the `group` property to filter templates client-side.
    </span><span class="p">],</span><span class="w">
    </span><span class="nt">"fields"</span><span class="p">:[</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"text_field1_1"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product name"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"AdRapid Phone"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"text_field1_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Product name"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="w">  </span><span class="mi">20</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"AdRapid Phone"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"text_sign2_1"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Price"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"$399"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"text_sign2_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Price"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"max_length"</span><span class="p">:</span><span class="w">  </span><span class="mi">6</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"$399"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"img_1"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product image"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"http://platform.adrapid.com/uploads/client_uploads/demo/img/b73f2d_ebf9_phone1024x1024.png"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"img_1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Product image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"http://adrapid.com/image.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"img_2"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Product logo"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"http://platform.adrapid.com/cache/dummy_default/logos-demo-mobile_pads/adrapid_white.png"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"img_2"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Product logo"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"http://adrapid.com/image.png"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"color_background1"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Background color"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"#b8594c"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"color_background1"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Background color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"#b8594c"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="p">{</span><span class="w">
-         </span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"color_texts"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"label"</span><span class="p">:</span><span class="s2">"Text color"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"default"</span><span class="p">:</span><span class="s2">"#ffffff"</span><span class="w">
+         </span><span class="nt">"name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"color_texts"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"label"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Text color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"type"</span><span class="p">:</span><span class="w">        </span><span class="s2">"color"</span><span class="p">,</span><span class="w">
+         </span><span class="nt">"default"</span><span class="p">:</span><span class="w">     </span><span class="s2">"#ffffff"</span><span class="w">
       </span><span class="p">}</span><span class="w">
    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -403,26 +404,28 @@ results in typically less than one minute.</p>
 <span class="p">});</span>
 
 <span class="kd">var</span> <span class="nx">order</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"templateId"</span><span class="p">:</span> <span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span>
-  <span class="s2">"formats"</span><span class="p">:</span> <span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span> <span class="s2">"text_field1_1"</span><span class="p">:</span> <span class="s2">"Sony Xperia Z3"</span><span class="p">,</span>
-  <span class="s2">"text_field1_2"</span><span class="p">:</span> <span class="s2">"The brand new"</span><span class="p">,</span>
-  <span class="s2">"text_field1_3"</span><span class="p">:</span> <span class="s2">"city mobile"</span><span class="p">,</span>
-  <span class="s2">"text_field1_7"</span><span class="p">:</span> <span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span> <span class="s2">"text_sign2_1"</span><span class="p">:</span> <span class="s2">"$199"</span><span class="p">,</span>
-  <span class="s2">"text_sign1_2"</span><span class="p">:</span> <span class="s2">"Org. price $399"</span><span class="p">,</span>
-  <span class="s2">"text_sign1_4"</span><span class="p">:</span> <span class="s2">"NOW!"</span><span class="p">,</span>
-  <span class="s2">"text_sign1_3"</span><span class="p">:</span> <span class="s2">"Buy now!"</span><span class="p">,</span>
-  <span class="s2">"text_sign1_1"</span><span class="p">:</span> <span class="s2">"XPERIA Z3"</span><span class="p">,</span>
-  <span class="s2">"text_field1_4"</span><span class="p">:</span> <span class="s2">"Waterproof"</span><span class="p">,</span>
-  <span class="s2">"text_field1_5"</span><span class="p">:</span> <span class="s2">"5.2-inch 4K screen"</span><span class="p">,</span>
-  <span class="s2">"text_field1_6"</span><span class="p">:</span> <span class="s2">"920 standby hours"</span><span class="p">,</span>
-  <span class="s2">"img_1"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/product.png"</span><span class="p">,</span>
-  <span class="s2">"img_2"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/logo.png"</span><span class="p">,</span>
-  <span class="s2">"img_3"</span><span class="p">:</span> <span class="s2">"http://my-site.com/img/background.jpg"</span><span class="p">,</span> <span class="s2">"color_background1"</span><span class="p">:</span> <span class="s2">"#3399ff"</span><span class="p">,</span>
-  <span class="s2">"color_sign1"</span><span class="p">:</span> <span class="s2">"#ff6600"</span><span class="p">,</span>
-  <span class="s2">"color_text_field1"</span><span class="p">:</span> <span class="s2">"#333333"</span><span class="p">,</span>
-  <span class="s2">"color_text_sign1"</span><span class="p">:</span> <span class="s2">"#3344ff"</span><span class="p">,</span>
-  <span class="s2">"client_data"</span><span class="p">:</span> <span class="s2">"my own ID"</span><span class="p">,</span>
-  <span class="s2">"callback_url"</span><span class="p">:</span> <span class="s2">"http://my-site.com/order_callback.php"</span>
+  <span class="s2">"templateId"</span><span class="p">:</span>         <span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span>
+  <span class="s2">"formats"</span><span class="p">:</span>            <span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span> <span class="s2">"text_field1_1"</span><span class="p">:</span>      <span class="s2">"Sony Xperia Z3"</span><span class="p">,</span>
+  <span class="s2">"text_field1_2"</span><span class="p">:</span>      <span class="s2">"The brand new"</span><span class="p">,</span>
+  <span class="s2">"text_field1_3"</span><span class="p">:</span>      <span class="s2">"city mobile"</span><span class="p">,</span>
+  <span class="s2">"text_field1_7"</span><span class="p">:</span>      <span class="s2">"Valid until 14/12/14"</span><span class="p">,</span>
+  <span class="s2">"text_sign2_1"</span><span class="p">:</span>       <span class="s2">"$199"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_2"</span><span class="p">:</span>       <span class="s2">"Org. price $399"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_4"</span><span class="p">:</span>       <span class="s2">"NOW!"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_3"</span><span class="p">:</span>       <span class="s2">"Buy now!"</span><span class="p">,</span>
+  <span class="s2">"text_sign1_1"</span><span class="p">:</span>       <span class="s2">"XPERIA Z3"</span><span class="p">,</span>
+  <span class="s2">"text_field1_4"</span><span class="p">:</span>      <span class="s2">"Waterproof"</span><span class="p">,</span>
+  <span class="s2">"text_field1_5"</span><span class="p">:</span>      <span class="s2">"5.2-inch 4K screen"</span><span class="p">,</span>
+  <span class="s2">"text_field1_6"</span><span class="p">:</span>      <span class="s2">"920 standby hours"</span><span class="p">,</span>
+  <span class="s2">"img_1"</span><span class="p">:</span>              <span class="s2">"http://my-site.com/img/product.png"</span><span class="p">,</span>
+  <span class="s2">"img_2"</span><span class="p">:</span>              <span class="s2">"http://my-site.com/img/logo.png"</span><span class="p">,</span>
+  <span class="s2">"img_3"</span><span class="p">:</span>              <span class="s2">"http://my-site.com/img/background.jpg"</span><span class="p">,</span>
+  <span class="s2">"color_background1"</span><span class="p">:</span>  <span class="s2">"#3399ff"</span><span class="p">,</span>
+  <span class="s2">"color_sign1"</span><span class="p">:</span>        <span class="s2">"#ff6600"</span><span class="p">,</span>
+  <span class="s2">"color_text_field1"</span><span class="p">:</span>  <span class="s2">"#333333"</span><span class="p">,</span>
+  <span class="s2">"color_text_sign1"</span><span class="p">:</span>   <span class="s2">"#3344ff"</span><span class="p">,</span>
+  <span class="s2">"client_data"</span><span class="p">:</span>        <span class="s2">"my own ID"</span><span class="p">,</span>
+  <span class="s2">"callback_url"</span><span class="p">:</span>       <span class="s2">"http://my-site.com/order_callback.php"</span>
 <span class="p">}</span>
 
 <span class="nx">adrapid</span><span class="p">.</span><span class="nx">sendOrder</span><span class="p">(</span><span class="nx">order</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">orderId</span><span class="p">){</span>
@@ -604,10 +607,10 @@ and display them on the browser as they are completed.</p>
 <p>item_complete event:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asft"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w">     </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w">   </span><span class="s2">"banner"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300x300"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
