@@ -13,6 +13,7 @@ includes:
   - templates
   - orders
   - events
+  - medias
   - errors
 
 search: true
