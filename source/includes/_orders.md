@@ -17,26 +17,28 @@ var adrapid = require('adrapid')({
 });
 
 var order = {
-  "templateId": "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "formats": "banner_300x250,banner_300x60,banner_980x240", "text_field1_1": "Sony Xperia Z3",
-  "text_field1_2": "The brand new",
-  "text_field1_3": "city mobile",
-  "text_field1_7": "Valid until 14\/12\/14", "text_sign2_1": "$199",
-  "text_sign1_2": "Org. price $399",
-  "text_sign1_4": "NOW!",
-  "text_sign1_3": "Buy now!",
-  "text_sign1_1": "XPERIA Z3",
-  "text_field1_4": "Waterproof",
-  "text_field1_5": "5.2-inch 4K screen",
-  "text_field1_6": "920 standby hours",
-  "img_1": "http://my-site.com/img/product.png",
-  "img_2": "http://my-site.com/img/logo.png",
-  "img_3": "http://my-site.com/img/background.jpg", "color_background1": "#3399ff",
-  "color_sign1": "#ff6600",
-  "color_text_field1": "#333333",
-  "color_text_sign1": "#3344ff",
-  "client_data": "my own ID",
-  "callback_url": "http://my-site.com/order_callback.php"
+  "templateId":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
+  "formats":            "banner_300x250,banner_300x60,banner_980x240", "text_field1_1":      "Sony Xperia Z3",
+  "text_field1_2":      "The brand new",
+  "text_field1_3":      "city mobile",
+  "text_field1_7":      "Valid until 14/12/14",
+  "text_sign2_1":       "$199",
+  "text_sign1_2":       "Org. price $399",
+  "text_sign1_4":       "NOW!",
+  "text_sign1_3":       "Buy now!",
+  "text_sign1_1":       "XPERIA Z3",
+  "text_field1_4":      "Waterproof",
+  "text_field1_5":      "5.2-inch 4K screen",
+  "text_field1_6":      "920 standby hours",
+  "img_1":              "http://my-site.com/img/product.png",
+  "img_2":              "http://my-site.com/img/logo.png",
+  "img_3":              "http://my-site.com/img/background.jpg",
+  "color_background1":  "#3399ff",
+  "color_sign1":        "#ff6600",
+  "color_text_field1":  "#333333",
+  "color_text_sign1":   "#3344ff",
+  "client_data":        "my own ID",
+  "callback_url":       "http://my-site.com/order_callback.php"
 }
 
 adrapid.sendOrder(order).then(function(orderId){
@@ -48,7 +50,37 @@ adrapid.sendOrder(order).then(function(orderId){
 
 ```shell
 curl -d @order.json --header "Content-Type:application/json" "http://api.adrapid.com/orders"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: my API key"
+```
+
+> example order data
+
+```json
+{
+  "templateId":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
+  "formats":            "banner_300x250,banner_300x60,banner_980x240", 
+  "text_field1_1":      "Sony Xperia Z3",
+  "text_field1_2":      "The brand new",
+  "text_field1_3":      "city mobile",
+  "text_field1_7":      "Valid until 14\/12\/14", 
+  "text_sign2_1":       "$199",
+  "text_sign1_2":       "Org. price $399",
+  "text_sign1_4":       "NOW!",
+  "text_sign1_3":       "Buy now!",
+  "text_sign1_1":       "XPERIA Z3",
+  "text_field1_4":      "Waterproof",
+  "text_field1_5":      "5.2-inch 4K screen",
+  "text_field1_6":      "920 standby hours",
+  "img_1":              "http://my-site.com/img/product.png",
+  "img_2":              "http://my-site.com/img/logo.png",
+  "img_3":              "http://my-site.com/img/background.jpg",
+  "color_background1":  "#3399ff",
+  "color_sign1":        "#ff6600",
+  "color_text_field1":  "#333333",
+  "color_text_sign1":   "#3344ff",
+  "callback_url":       "http://my-site.com/order_callback.php",
+  "client_data":        "my own ID",
+}
 ```
 
 This endpoint posts an order to generate a set of banners based on a given template data.
@@ -57,7 +89,8 @@ This endpoint posts an order to generate a set of banners based on a given templ
 
 `POST http://api.adrapid.com/orders`
 
-Returns an order ID that can be used by other APIs to retrieve order status and events.
+
+Returns an `order ID` that can be used by other APIs to retrieve order status and events.
 
 
 ### Mandatory Body parameters
@@ -65,6 +98,13 @@ Returns an order ID that can be used by other APIs to retrieve order status and 
 Parameter | Description
 --------- | -----------
 templateId | The ID of template to use for the order.
+formats | The requested formats, at least one valid ad format.
+
+
+The required fields for the ad content is supplied by the `template rules` method. No validation is required for text fields. However, produced ads will look empty if fields are missing, and texts will be clipped if they exceed the `max_length` limit.
+
+Invalid or missing colors and images are simply ignored, and will not cause an error.
+
 
 <aside class="success">
 Hint: use the Events API to retrieve real time status of your order!
@@ -91,7 +131,7 @@ Colors can be send in HEX, rgb(a), CMYK or HSL.
 
 ### Setting banner/video formats for order
 
-Order formats are determined by format strings. The formats string should contain a set of
+Order formats are determined by the `formats` string. The formats string should contain a set of
 order items, separated by commas. Each item is named by its format, separated by an underscore,
 followed by the size or identifier.
 
@@ -100,6 +140,7 @@ For example banner_320x160 and video_horizontal_15s ar valid formats. Some forma
 `banner_980x240, banner_300x1050:google_adwords, video_horizontal_15s`
 
 Available formats for a given template could be retrieved using the *get template formats* API.
+
 
 ### Include custom data and returning via a callback url
 
@@ -110,11 +151,12 @@ the order and returned in the request to given `callback_url`.
 a request is made to the url specified in the `callback_url`, containing the order ID as well as
 the `client_data` string.
 
+
 ## Get order
 
 ```javascript
 var adrapid = require('adrapid')({
-  url: 'http://platform.adrapid.com/api/',
+  url: 'http://api.adrapid.com/',
   key: 'my API key',
   token: 'my secret token'
 });
@@ -128,7 +170,7 @@ adrapid.getOrder(orderId).then(function(order){
 
 ```shell
 curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
-  -H "Authorization: meowmeowmeow"
+  -H "Authorization: my API key"
 ```
 
 > The above command returns JSON structured like this:
@@ -138,8 +180,10 @@ curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
     "status": "rendering",
     "items": [
      {
-      "id" : "1234",
-      "url": "orders.adrapid.com/:orderId/:itemId"
+      "id":     "1234",
+      "type":   "banner",
+      "format": "980x240",
+      "url":    "http://orders.adrapid.com/:orderId/:itemId"
      }
     ]
 }

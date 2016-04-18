@@ -10,10 +10,10 @@ and display them on the browser as they are completed.
 
 ```json
 {
-    "id": "1234",
-    "type": "asft",
+    "id":     "1234",
+    "type":   "banner",
     "format": "300x300",
-    "url": "orders.adrapid.com/:orderId/:itemId"
+    "url":    "http://orders.adrapid.com/:orderId/:itemId"
 }
 ```
 
