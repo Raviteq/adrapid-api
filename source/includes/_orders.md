@@ -58,11 +58,11 @@ curl -d @order.json --header "Content-Type:application/json" "http://api.adrapid
 ```json
 {
   "templateId":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "formats":            "banner_300x250,banner_300x60,banner_980x240", 
+  "formats":            "banner_300x250,banner_300x60,banner_980x240",
   "text_field1_1":      "Sony Xperia Z3",
   "text_field1_2":      "The brand new",
   "text_field1_3":      "city mobile",
-  "text_field1_7":      "Valid until 14\/12\/14", 
+  "text_field1_7":      "Valid until 14\/12\/14",
   "text_sign2_1":       "$199",
   "text_sign1_2":       "Org. price $399",
   "text_sign1_4":       "NOW!",
@@ -112,7 +112,8 @@ Hint: use the Events API to retrieve real time status of your order!
 
 ### Sending images
 
-Images can be send as either a *URL*, raw binary data (ie. as standard "HTTP post"), or as a *base64-encoded* string.
+Images can be send as either a *URL*. It is also possible to use a *media id* if the media
+was sent using the media upload API (raw binary data (ie. as standard "HTTP post"), or as a *base64-encoded* string).
 
 > All these color examples are valid:
 
@@ -127,7 +128,6 @@ Images can be send as either a *URL*, raw binary data (ie. as standard "HTTP pos
 ### Sending colors
 
 Colors can be send in HEX, rgb(a), CMYK or HSL.
-
 
 ### Setting banner/video formats for order
 
