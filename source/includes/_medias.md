@@ -42,6 +42,7 @@ Use this API to upload files. The returned media ID can be used to track transco
 ## Progress
 
 The transcoding process can take some time, so in order to track the progress the following API is provided.
+The progress is reported as an Integer ranging from 0 to 100.
 
 ### SSE Endpoint
 

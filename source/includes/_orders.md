@@ -101,10 +101,11 @@ templateId | The ID of template to use for the order.
 formats | The requested formats, at least one valid ad format.
 
 
-The required fields for the ad content is supplied by the `template rules` method. No validation is required for text fields. However, produced ads will look empty if fields are missing, and texts will be clipped if they exceed the `max_length` limit.
+The required fields for the ad content is supplied by the `template rules` method. No
+validation is required for text fields. However, produced ads will look empty if
+fields are missing, and texts will be clipped if they exceed the `max_length` limit.
 
 Invalid or missing colors and images are simply ignored, and will not cause an error.
-
 
 <aside class="success">
 Hint: use the Events API to retrieve real time status of your order!
@@ -113,7 +114,8 @@ Hint: use the Events API to retrieve real time status of your order!
 ### Sending images
 
 Images can be send as either a *URL*. It is also possible to use a *media id* if the media
-was sent using the media upload API (raw binary data (ie. as standard "HTTP post"), or as a *base64-encoded* string).
+was sent using the *media upload API* (raw binary data, ie. as standard "HTTP post", or as
+a *base64-encoded* string).
 
 > All these color examples are valid:
 
