@@ -23,6 +23,15 @@ search: true
 
 This is the [AdRapid](http://www.adrapid.com) public API v1.0 documentation
 
+### API URL
+The base URL for all API requests is `http://api.adrapid.com/`. A set of public
+methods are available as specified in this document.
+
+### Implementation examples
+A set of example implementations is available in the [AdRapid API examples](https://github.com/Raviteq/AdRapid-API-examples) repository. The javascript examples in this document is using the AdRapid wrapper available in this repository.
+
+A separate library for frontend helpers is also available in the repository. Feel free to clone the repo, play around with it and pick out the best parts for your use-case.
+
 
 ### Basic description of the order workflow
 `AdRapid` is a rendering platform used for rendering a variety of `ads`. It supports
@@ -43,10 +52,6 @@ The resulting order is sent in an `order request`, using the `send order` method
 Orders may be tracked in real time using *server-sent events*. Alternatively, a request
 may also be sent to an URL of choice, if specified in the order request.
 
-
-### API URL
-The base URL for all API requests is `http://api.adrapid.com/`. A set of public
-methods are available as specified in this document.
 
 # Authentication
 
