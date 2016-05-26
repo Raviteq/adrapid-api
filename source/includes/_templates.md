@@ -20,7 +20,7 @@ var adrapid = require('adrapid')({
   token: 'my secret token'
 });
 
-adrapid.getTemplates().then(function(templates){
+adrapid.templates().then(function(templates){
   // do something with our templates
   console.log(templates);
 }, function(err){
@@ -85,7 +85,7 @@ var adrapid = require('adrapid')({
   token: 'my secret token'
 });
 
-adrapid.getRules(templateId).then(function(rules){
+adrapid.rules(templateId).then(function(rules){
 
 }, function(err){
   console.error('Error getting templates', err);
@@ -94,7 +94,7 @@ adrapid.getRules(templateId).then(function(rules){
 ```
 
 ```shell
-curl "http://api.adrapid.com/templates/$TEMPLATE_ID/rules"
+curl "http://api.adrapid.com/templates/$TEMPLATE_ID"
   -H "Authorization: my API key"
 ```
 

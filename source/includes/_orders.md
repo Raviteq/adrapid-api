@@ -227,26 +227,22 @@ curl "http://api.adrapid.com/get_item_content/$MY_ITEM_ID"
   -H "Authorization: my API key"
 ```
 
-> The above command returns JSON structured like this:
+> The above command returns an JSON array, the property `preview` contains HTML for the selected order item.
 
-```json
-{
-  preview: '
-    <div class="embed-container">
-      <iframe 
-        id="iframe_result"
-        src="http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"
-        width="970"
-        height="250"
-        style="width: 970px; height: 250px; border: none;"
-        border="0"
-        frameBorder="0"
-        scrolling="no"
-        seamless="seamless"
-      ></iframe>
-    </div>
-  '
-}
+```html
+<div class="embed-container">
+  <iframe 
+    id="iframe_result"
+    src="http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"
+    width="970"
+    height="250"
+    style="width: 970px; height: 250px; border: none;"
+    border="0"
+    frameBorder="0"
+    scrolling="no"
+    seamless="seamless"
+  ></iframe>
+</div>
 ```
 
 Get the embed HTML for an order item. Since different ad types requires different embed code, we provide this method for easily getting the content of an order item.

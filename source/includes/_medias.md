@@ -15,7 +15,7 @@ Get all the medias uploaded. (TODO: Add query params for search, pagination, etc
   "name": "my image",
   "type": "image",
   "preview": "http://medias.adrapid.com/1234/preview",
-  "thumbnail": "http://medias.adrapid.com/1234/thumbnail",
+  "thumbnail": "http://medias.adrapid.com/1234/thumbnail"
 },
 {
   "id": "5678",
@@ -25,6 +25,11 @@ Get all the medias uploaded. (TODO: Add query params for search, pagination, etc
   "thumbnail": "http://medias.adrapid.com/5678/thumbnail"
 }]
 ```
+
+<aside class="success">
+Hint: dynamically generate a thumbnail in any size using URL formatted like `http://api.adrapid.com/thumbnail/$WIDTH/path-to-file.jpg. Thumbnails are cached and are generated very quickly. 
+</aside>
+
 
 ## Upload
 
