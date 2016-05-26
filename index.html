@@ -633,26 +633,22 @@ urls are only guaranteed to exist 24 hours after the order has been executed.</p
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns an JSON array, the property <code class="prettyprint">preview</code> contains HTML for the selected order item.</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="err">preview:</span><span class="w"> </span><span class="err">'</span><span class="w">
-    </span><span class="err">&lt;div</span><span class="w"> </span><span class="err">class=</span><span class="nt">"embed-container"</span><span class="err">&gt;</span><span class="w">
-      </span><span class="err">&lt;iframe</span><span class="w"> 
-        </span><span class="err">id=</span><span class="nt">"iframe_result"</span><span class="w">
-        </span><span class="err">src=</span><span class="nt">"http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"</span><span class="w">
-        </span><span class="err">width=</span><span class="nt">"970"</span><span class="w">
-        </span><span class="err">height=</span><span class="nt">"250"</span><span class="w">
-        </span><span class="err">style=</span><span class="nt">"width: 970px; height: 250px; border: none;"</span><span class="w">
-        </span><span class="err">border=</span><span class="nt">"0"</span><span class="w">
-        </span><span class="err">frameBorder=</span><span class="nt">"0"</span><span class="w">
-        </span><span class="err">scrolling=</span><span class="nt">"no"</span><span class="w">
-        </span><span class="err">seamless=</span><span class="nt">"seamless"</span><span class="w">
-      </span><span class="err">&gt;&lt;/iframe&gt;</span><span class="w">
-    </span><span class="err">&lt;/div&gt;</span><span class="w">
-  </span><span class="err">'</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
+<pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"embed-container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;iframe</span> 
+    <span class="na">id=</span><span class="s">"iframe_result"</span>
+    <span class="na">src=</span><span class="s">"http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"</span>
+    <span class="na">width=</span><span class="s">"970"</span>
+    <span class="na">height=</span><span class="s">"250"</span>
+    <span class="na">style=</span><span class="s">"width: 970px; height: 250px; border: none;"</span>
+    <span class="na">border=</span><span class="s">"0"</span>
+    <span class="na">frameBorder=</span><span class="s">"0"</span>
+    <span class="na">scrolling=</span><span class="s">"no"</span>
+    <span class="na">seamless=</span><span class="s">"seamless"</span>
+  <span class="nt">&gt;&lt;/iframe&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre>
 
 <p>Get the embed HTML for an order item. Since different ad types requires different embed code, we provide this method for easily getting the content of an order item.</p>
 
@@ -760,8 +756,8 @@ The uploaded medias can also be used on orders, allowing the re-use of medias fo
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my image"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/1234/preview"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/1234/thumbnail"</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/1234/thumbnail"</span><span class="w">
+</span><span class="p">},</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5678"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my video"</span><span class="p">,</span><span class="w">
@@ -770,6 +766,10 @@ The uploaded medias can also be used on orders, allowing the re-use of medias fo
   </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/5678/thumbnail"</span><span class="w">
 </span><span class="p">}]</span><span class="w">
 </span></code></pre>
+
+<aside class="success">
+Hint: dynamically generate a thumbnail in any size using URL formatted like `http://api.adrapid.com/thumbnail/$WIDTH/path-to-file.jpg. Thumbnails are cached and are generated very quickly. 
+</aside>
 
 <h2 id="upload">Upload</h2>
 <pre class="highlight shell"><code>curl -F <span class="nb">test</span><span class="o">=</span>@my-image.jpg http://api.adrapid.com/medias
