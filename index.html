@@ -124,17 +124,28 @@
 
 <h3 id="basic-description-of-the-order-workflow">Basic description of the order workflow</h3>
 
-<p><code class="prettyprint">AdRapid</code> is a rendering platform used for rendering a variety of <code class="prettyprint">ads</code>. We support a number of <em>ad types</em> - these include <em>html5 banners</em>, <em>flash banners</em>, <em>video</em>, as well as <em>printed material</em>. The rendering platform is based around a concept of <code class="prettyprint">clients</code>, <code class="prettyprint">templates</code> and <code class="prettyprint">orders</code>. </p>
+<p><code class="prettyprint">AdRapid</code> is a rendering platform used for rendering a variety of <code class="prettyprint">ads</code>. It supports
+a number of different <em>ad types</em> - such as <em>html5 banners</em>, <em>flash banners</em>, <em>video</em>,
+as well as <em>print material</em>.</p>
 
-<p>Every <code class="prettyprint">client</code> has access to a given set of <code class="prettyprint">templates</code>. A <code class="prettyprint">template</code> describes the overall layout of an ad. A template also contains a set of available <code class="prettyprint">ad formats</code>, for different types of ads as listed above. The end user supplies texts, images and colors, as well as the desired <code class="prettyprint">ad formats</code>, resulting in an <code class="prettyprint">order</code>. </p>
+<p>The rendering platform is based around a concept of <code class="prettyprint">clients</code>, <code class="prettyprint">templates</code> and <code class="prettyprint">orders</code>.</p>
 
-<p>The resulting order is sent in an <code class="prettyprint">order request</code>, using the <code class="prettyprint">send order</code> method. An <code class="prettyprint">order request</code> must include the selected template, as well as the desired content (texts, colors, images).</p>
+<p>Every <code class="prettyprint">client</code> has access to a given set of <code class="prettyprint">templates</code>. A <code class="prettyprint">template</code> describes the
+overall layout of an ad. A template also contains a set of available <code class="prettyprint">ad formats</code>,
+for different types of ads as listed above. The end user supplies texts, images and
+colors, as well as the desired <code class="prettyprint">ad formats</code>, resulting in an <code class="prettyprint">order</code>.</p>
 
-<p>Orders may be tracked in real time using <em>server-sent events</em>. Alternatively, a request may also be sent to an URL of choice, if specified in the order request.</p>
+<p>The resulting order is sent in an <code class="prettyprint">order request</code>, using the <code class="prettyprint">send order</code> method. An
+<code class="prettyprint">order request</code> must include the selected template, as well as the desired content
+(texts, colors, images).</p>
+
+<p>Orders may be tracked in real time using <em>server-sent events</em>. Alternatively, a request
+may also be sent to an URL of choice, if specified in the order request.</p>
 
 <h3 id="api-url">API URL</h3>
 
-<p>The base URL for all API requests is <code class="prettyprint">http://api.adrapid.com/</code>. A set of public methods are available as specified in this document.</p>
+<p>The base URL for all API requests is <code class="prettyprint">http://api.adrapid.com/</code>. A set of public
+methods are available as specified in this document.</p>
 
 <h1 id="authentication">Authentication</h1>
 
@@ -157,7 +168,10 @@ curl http://api.adrapid.com/
 <p>Make sure to replace <code class="prettyprint">my API Key</code> and <code class="prettyprint">my secret token</code> with your API key and token respectively.</p>
 </blockquote>
 
-<p>Each client has an private API-key as well as an public API-key. Every template/project has an unique API-key/identifier. The private client API-key should never be send in itself, but is used for generating authentication tokens. Currently only the public client API-key is needed for authentication for most of the API methods.</p>
+<p>Each client has an private API-key as well as an public API-key. Every template/project has a
+unique API-key/identifier. The private client API-key should never be send in itself, but is used
+for generating authentication tokens. Currently only the public client API-key is needed for
+authentication for most of the API methods.</p>
 
 <p>You can register for a new AdRapid API key at our <a href="http://adrapid.com/developers">developer portal</a>.</p>
 
@@ -186,7 +200,7 @@ send orders based on the given template.</p>
   <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
 <span class="p">});</span>
 
-<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getTemplates</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">templates</span><span class="p">){</span>
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">templates</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">templates</span><span class="p">){</span>
   <span class="c1">// do something with our templates</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">templates</span><span class="p">);</span>
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
@@ -248,14 +262,14 @@ Hint: use the `group` property to filter templates client-side.
   <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
 <span class="p">});</span>
 
-<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getRules</span><span class="p">(</span><span class="nx">templateId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">rules</span><span class="p">){</span>
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">rules</span><span class="p">(</span><span class="nx">templateId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">rules</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'Error getting templates'</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
 <span class="p">});</span>
 
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/templates/</span><span class="nv">$TEMPLATE_ID</span><span class="s2">/rules"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/templates/</span><span class="nv">$TEMPLATE_ID</span><span class="s2">"</span>
   -H <span class="s2">"Authorization: my API key"</span>
 </code></pre>
 
@@ -405,7 +419,8 @@ results in typically less than one minute.</p>
 
 <span class="kd">var</span> <span class="nx">order</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"templateId"</span><span class="p">:</span>         <span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span>
-  <span class="s2">"formats"</span><span class="p">:</span>            <span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span> <span class="s2">"text_field1_1"</span><span class="p">:</span>      <span class="s2">"Sony Xperia Z3"</span><span class="p">,</span>
+  <span class="s2">"formats"</span><span class="p">:</span>            <span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span> 
+  <span class="s2">"text_field1_1"</span><span class="p">:</span>      <span class="s2">"Sony Xperia Z3"</span><span class="p">,</span>
   <span class="s2">"text_field1_2"</span><span class="p">:</span>      <span class="s2">"The brand new"</span><span class="p">,</span>
   <span class="s2">"text_field1_3"</span><span class="p">:</span>      <span class="s2">"city mobile"</span><span class="p">,</span>
   <span class="s2">"text_field1_7"</span><span class="p">:</span>      <span class="s2">"Valid until 14/12/14"</span><span class="p">,</span>
@@ -443,11 +458,11 @@ results in typically less than one minute.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"templateId"</span><span class="p">:</span><span class="w">         </span><span class="s2">"qual3097a002fdaeeb02a79e877bb9bda7e502ae"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w">            </span><span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"formats"</span><span class="p">:</span><span class="w">            </span><span class="s2">"banner_300x250,banner_300x60,banner_980x240"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_field1_1"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Sony Xperia Z3"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_field1_2"</span><span class="p">:</span><span class="w">      </span><span class="s2">"The brand new"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_field1_3"</span><span class="p">:</span><span class="w">      </span><span class="s2">"city mobile"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"text_field1_7"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nt">"text_field1_7"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Valid until 14\/12\/14"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_sign2_1"</span><span class="p">:</span><span class="w">       </span><span class="s2">"$199"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_sign1_2"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Org. price $399"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"text_sign1_4"</span><span class="p">:</span><span class="w">       </span><span class="s2">"NOW!"</span><span class="p">,</span><span class="w">
@@ -494,7 +509,9 @@ results in typically less than one minute.</p>
 </tr>
 </tbody></table>
 
-<p>The required fields for the ad content is supplied by the <code class="prettyprint">template rules</code> method. No validation is required for text fields. However, produced ads will look empty if fields are missing, and texts will be clipped if they exceed the <code class="prettyprint">max_length</code> limit.</p>
+<p>The required fields for the ad content is supplied by the <code class="prettyprint">template rules</code> method. No
+validation is required for text fields. However, produced ads will look empty if
+fields are missing, and texts will be clipped if they exceed the <code class="prettyprint">max_length</code> limit.</p>
 
 <p>Invalid or missing colors and images are simply ignored, and will not cause an error.</p>
 
@@ -504,7 +521,9 @@ Hint: use the Events API to retrieve real time status of your order!
 
 <h3 id="sending-images">Sending images</h3>
 
-<p>Images can be send as either a <em>URL</em>, raw binary data (ie. as standard &ldquo;HTTP post&rdquo;), or as a <em>base64-encoded</em> string.</p>
+<p>Images can be send as either a <em>URL</em>. It is also possible to use a <em>media id</em> if the media
+was sent using the <em>media upload API</em> (raw binary data, ie. as standard &ldquo;HTTP post&rdquo;, or as
+a <em>base64-encoded</em> string).</p>
 
 <blockquote>
 <p>All these color examples are valid:</p>
@@ -569,8 +588,8 @@ the <code class="prettyprint">client_data</code> string.</p>
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w">     </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w">   </span><span class="s2">"banner"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"980x240"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="p">,</span><span class="w">
+     </span><span class="err">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -593,6 +612,63 @@ urls are only guaranteed to exist 24 hours after the order has been executed.</p
 <tr>
 <td>id</td>
 <td>id of the order we want to retrieve its data.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-embed-code">Get embed code</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s1">'my API key'</span><span class="p">,</span>
+  <span class="na">token</span><span class="p">:</span> <span class="s1">'my secret token'</span>
+<span class="p">});</span>
+
+<span class="nx">adrapid</span><span class="p">.</span><span class="nx">getPreview</span><span class="p">(</span><span class="nx">itemId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">preview</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/get_item_content/</span><span class="nv">$MY_ITEM_ID</span><span class="s2">"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">preview:</span><span class="w"> </span><span class="err">'</span><span class="w">
+    </span><span class="err">&lt;div</span><span class="w"> </span><span class="err">class=</span><span class="nt">"embed-container"</span><span class="err">&gt;</span><span class="w">
+      </span><span class="err">&lt;iframe</span><span class="w"> 
+        </span><span class="err">id=</span><span class="nt">"iframe_result"</span><span class="w">
+        </span><span class="err">src=</span><span class="nt">"http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"</span><span class="w">
+        </span><span class="err">width=</span><span class="nt">"970"</span><span class="w">
+        </span><span class="err">height=</span><span class="nt">"250"</span><span class="w">
+        </span><span class="err">style=</span><span class="nt">"width: 970px; height: 250px; border: none;"</span><span class="w">
+        </span><span class="err">border=</span><span class="nt">"0"</span><span class="w">
+        </span><span class="err">frameBorder=</span><span class="nt">"0"</span><span class="w">
+        </span><span class="err">scrolling=</span><span class="nt">"no"</span><span class="w">
+        </span><span class="err">seamless=</span><span class="nt">"seamless"</span><span class="w">
+      </span><span class="err">&gt;&lt;/iframe&gt;</span><span class="w">
+    </span><span class="err">&lt;/div&gt;</span><span class="w">
+  </span><span class="err">'</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<p>Get the embed HTML for an order item. Since different ad types requires different embed code, we provide this method for easily getting the content of an order item.</p>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/get_item_content/:item_id</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>item_id</td>
+<td>id of the order item we want to retrieve embed code for.</td>
 </tr>
 </tbody></table>
 
@@ -668,6 +744,52 @@ and display them on the browser as they are completed.</p>
 <h3 id="sse-endpoint">SSE Endpoint</h3>
 
 <p><code class="prettyprint">http://api.adrapid.com/events/order/:id/:token</code></p>
+
+          <h1 id="medias">Medias</h1>
+
+<p>The medias API provides a simple interface to upload medias of any format and get a preview url that is suitable for webpages.
+The uploaded medias can also be used on orders, allowing the re-use of medias for different orders.</p>
+
+<h2 id="retrieve">Retrieve</h2>
+
+<p>Get all the medias uploaded. (TODO: Add query params for search, pagination, etc)</p>
+
+<p><code class="prettyprint">GET http://api.adrapid.com/medias/</code></p>
+<pre class="highlight json"><code><span class="p">[{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/1234/preview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/1234/thumbnail"</span><span class="p">,</span><span class="w">
+</span><span class="err">}</span><span class="p">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5678"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my video"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"video"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/5678/preview"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"thumbnail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://medias.adrapid.com/5678/thumbnail"</span><span class="w">
+</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+
+<h2 id="upload">Upload</h2>
+<pre class="highlight shell"><code>curl -F <span class="nb">test</span><span class="o">=</span>@my-image.jpg http://api.adrapid.com/medias
+</code></pre>
+
+<p>The medias API supports many different media formats. For the complete list please see table XX.
+The uploaded medias are transcoded to a format suitable to be previewed in a webpage.
+Use this API to upload files. The returned media ID can be used to track transcoding process
+(see the <em>media progress</em> api).</p>
+
+<p><code class="prettyprint">POST http://api.adrapid.com/medias/</code></p>
+
+<h2 id="progress">Progress</h2>
+
+<p>The transcoding process can take some time, so in order to track the progress the following API is provided.
+The progress is reported as an Integer ranging from 0 to 100.</p>
+
+<h3 id="sse-endpoint">SSE Endpoint</h3>
+
+<p><code class="prettyprint">http://api.adrapid.com/medias/:id/</code></p>
 
           <h1 id="errors">Errors</h1>
 
