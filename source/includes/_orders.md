@@ -18,7 +18,8 @@ var adrapid = require('adrapid')({
 
 var order = {
   "templateId":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "formats":            "banner_300x250,banner_300x60,banner_980x240", "text_field1_1":      "Sony Xperia Z3",
+  "formats":            "banner_300x250,banner_300x60,banner_980x240", 
+  "text_field1_1":      "Sony Xperia Z3",
   "text_field1_2":      "The brand new",
   "text_field1_3":      "city mobile",
   "text_field1_7":      "Valid until 14/12/14",
@@ -185,7 +186,7 @@ curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
       "id":     "1234",
       "type":   "banner",
       "format": "980x240",
-      "url":    "http://orders.adrapid.com/:orderId/:itemId"
+      "url":    "http://orders.adrapid.com/:orderId/:itemId",
      }
     ]
 }
@@ -204,3 +205,56 @@ Parameter |  Description
 --------- | -------------
 id        | id of the order we want to retrieve its data.
 
+
+## Get embed code
+
+```javascript
+var adrapid = require('adrapid')({
+  url: 'http://api.adrapid.com/',
+  key: 'my API key',
+  token: 'my secret token'
+});
+
+adrapid.getPreview(itemId).then(function(result){
+  document.body.appendChild(result.preview);
+}, function(err){
+  console.error(err);
+});
+```
+
+```shell
+curl "http://api.adrapid.com/get_item_content/$MY_ITEM_ID"
+  -H "Authorization: my API key"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  preview: '
+    <div class="embed-container">
+      <iframe 
+        id="iframe_result"
+        src="http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"
+        width="970"
+        height="250"
+        style="width: 970px; height: 250px; border: none;"
+        border="0"
+        frameBorder="0"
+        scrolling="no"
+        seamless="seamless"
+      ></iframe>
+    </div>
+  '
+}
+```
+
+Get the embed HTML for an order item. Since different ad types requires different embed code, we provide this method for easily getting the content of an order item.
+
+`GET http://api.adrapid.com/get_item_content/:item_id`
+
+### URL Parameters
+
+Parameter |  Description
+--------- | -------------
+item_id   | id of the order item we want to retrieve embed code for.
