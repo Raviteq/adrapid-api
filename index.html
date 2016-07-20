@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,8 +101,9 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="shell">cURL</a>
               <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="php">php</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -778,15 +779,64 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 </aside>
 
 <h2 id="upload">Upload</h2>
-<pre class="highlight shell"><code>curl -F <span class="nb">test</span><span class="o">=</span>@my-image.jpg http://api.adrapid.com/medias
+<pre class="highlight shell"><code>curl http://api.adrapid.com/medias 
+  -F <span class="nb">test</span><span class="o">=</span>@my-image.jpg 
+  -H <span class="s2">"Authorization: my API key"</span>
 </code></pre>
 
 <p>The medias API supports many different media formats. For the complete list please see table XX.
 The uploaded medias are transcoded to a format suitable to be previewed in a webpage.
+Several methods for sending files are provided. Files can be sent either as regular file upload, as an URL, or as base64-encoded strings. Several images may be uploaded in a single request. 
 Use this API to upload files. The returned media ID can be used to track transcoding process
-(see the <em>media progress</em> api).</p>
+(see the <em>media progress</em> API).</p>
 
 <p><code class="prettyprint">POST http://api.adrapid.com/medias/</code></p>
+
+<h2 id="crop">Crop</h2>
+<pre class="highlight shell"><code>curl test.adrapid.com/api/debug
+  -d <span class="s2">"image=http://my-site.com/my-image.jpg"</span> 
+  -d <span class="s2">"x=29.14%"</span> 
+  -d <span class="s2">"y=18.52%"</span> 
+  -d <span class="s2">"width=34.32%"</span> 
+  -d <span class="s2">"height=22.72%"</span>
+</code></pre>
+
+<p>Images can be cropped by suppling extra parameters to the <em>medias</em> method. The available parameters are listed in the table below. At least one parameter must be provided. 
+AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio.</p>
+
+<p>The values may be set as pixels or as a percentage.  </p>
+
+<p>Thumbnails may be used, AdRapid will perform the cropping on the original image and return a thumbnail. This ensures maximum image quality, while avoiding sending unnecessarily much data to/from the client. </p>
+
+<p>Cropping parameters may be supplied when uploading medias to instantly crop the file(s) according to the rules specified. If multiple images are supplied in the same request, the cropping rules will be applied to all images supplied. To crop a previously uploaded image, supply the ID or URL for the image.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>Parameters may be defined in pixels or as percentages.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>x</td>
+<td>pixels/percentage from the left side</td>
+</tr>
+<tr>
+<td>y</td>
+<td>pixels/percentage from the left side</td>
+</tr>
+<tr>
+<td>width</td>
+<td>pixels/percentage of crop width</td>
+</tr>
+<tr>
+<td>height</td>
+<td>pixels/percentage of crop height</td>
+</tr>
+</tbody></table>
 
 <h2 id="progress">Progress</h2>
 
@@ -845,8 +895,9 @@ For more specific errors check every API call documentation.
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="shell">cURL</a>
                 <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
