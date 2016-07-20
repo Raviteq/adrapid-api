@@ -34,15 +34,52 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 ## Upload
 
 ```shell
-curl -F test=@my-image.jpg http://api.adrapid.com/medias
+curl http://api.adrapid.com/medias 
+  -F test=@my-image.jpg 
+  -H "Authorization: my API key"
 ```
 
 The medias API supports many different media formats. For the complete list please see table XX.
 The uploaded medias are transcoded to a format suitable to be previewed in a webpage.
+Several methods for sending files are provided. Files can be sent either as regular file upload, as an URL, or as base64-encoded strings. Several images may be uploaded in a single request. 
 Use this API to upload files. The returned media ID can be used to track transcoding process
-(see the *media progress* api).
+(see the *media progress* API).
 
 `POST http://api.adrapid.com/medias/`
+
+## Crop
+
+```shell
+curl test.adrapid.com/api/debug
+  -d "image=http://my-site.com/my-image.jpg" 
+  -d "x=29.14%" 
+  -d "y=18.52%" 
+  -d "width=34.32%" 
+  -d "height=22.72%"
+```
+
+Images can be cropped by suppling extra parameters to the *medias* method. The available parameters are listed in the table below. At least one parameter must be provided. 
+AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio.
+
+The values may be set as pixels or as a percentage.  
+
+Thumbnails may be used, AdRapid will perform the cropping on the original image and return a thumbnail. This ensures maximum image quality, while avoiding sending unnecessarily much data to/from the client. 
+
+Cropping parameters may be supplied when uploading medias to instantly crop the file(s) according to the rules specified. If multiple images are supplied in the same request, the cropping rules will be applied to all images supplied. To crop a previously uploaded image, supply the ID or URL for the image.
+
+
+
+### Parameters
+Parameters may be defined in pixels or as percentages.
+
+Parameter | Description
+--------- | -----------
+x | pixels/percentage from the left side
+y | pixels/percentage from the left side
+width | pixels/percentage of crop width
+height | pixels/percentage of crop height
+
+
 
 ## Progress
 
