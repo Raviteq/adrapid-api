@@ -44,15 +44,15 @@ curl http://api.adrapid.com/medias
 > upload a file by URL
 
 ```shell
-curl http://test.adrapid.com/api/medias 
+curl http://api.adrapid.com/api/medias 
   -H "Authorization: my API key" 
-  -F "myfile=http://test.adrapid.com/uploads/client_uploads/demo/img/36b0_Camera1024x1024.png"
+  -F "myfile=http://mysite.com/myfile.png"
 ```
 
 > upload a base64-encoded image
 
 ```shell
-curl "http://test.adrapid.com/api/medias"
+curl "http://api.adrapid.com/api/medias"
   -H "Authorization: my API key" 
   -F "myfile=data:image/png;base64,[...]"
 ```
@@ -84,8 +84,8 @@ Use this API to upload files. The returned media ID can be used to track transco
 ## Crop
 
 ```shell
-curl test.adrapid.com/api/debug
-  -d "image=http://my-site.com/my-image.jpg" 
+curl http://api.adrapid.com/api/medias
+  -d "image=$IMAGE_ID" 
   -d "x=29.14%" 
   -d "y=18.52%" 
   -d "width=34.32%" 
@@ -94,9 +94,7 @@ curl test.adrapid.com/api/debug
 ```
 
 Images can be cropped by suppling extra parameters to the *medias* method. The available parameters are listed in the table below. At least one parameter must be provided. 
-AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio.
-
-The values may be set as pixels or as a percentage.  
+AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio. The values may be set as pixels or as a percentage.  
 
 Thumbnails may be used, AdRapid will perform the cropping on the original image and return a thumbnail. This ensures maximum image quality, while avoiding sending unnecessarily much data to/from the client. 
 

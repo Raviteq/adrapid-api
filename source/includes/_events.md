@@ -21,13 +21,15 @@ and display them on the browser as they are completed.
 
 ```json
 {
-    "id": "123",
+    "id": "1234",
     "items": [
-     {
-      "id" : "1234",
-      "url": "orders.adrapid.com/:orderId/:itemId"
-     }
-    ]
+    {
+      "id" : "12345",
+      "url": "orders.adrapid.com/:orderId/:itemId",
+      "type":   "banner",
+      "format": "980x240"
+    }
+  ]
 }
 ```
 

@@ -52,8 +52,8 @@ adrapid.sendOrder(order).then(function(orderId){
 ```shell
 curl "http://api.adrapid.com/orders"
   -H "Authorization: my API key"
+  -H "Content-Type:application/json" 
   -d @order.json 
-  --header "Content-Type:application/json" 
 ```
 
 > example order data
@@ -82,7 +82,7 @@ curl "http://api.adrapid.com/orders"
   "color_text_field1":  "#333333",
   "color_text_sign1":   "#3344ff",
   "callback_url":       "http://my-site.com/order_callback.php",
-  "client_data":        "my own ID",
+  "client_data":        "my own ID"
 }
 ```
 
@@ -184,13 +184,13 @@ curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
 {
     "status": "rendering",
     "items": [
-     {
+    {
       "id":     "1234",
       "type":   "banner",
       "format": "980x240",
-      "url":    "http://orders.adrapid.com/:orderId/:itemId",
-     }
-    ]
+      "url":    "http://orders.adrapid.com/:orderId/:itemId"
+    }
+  ]
 }
 ```
 
