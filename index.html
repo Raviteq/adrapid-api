@@ -457,8 +457,8 @@ results in typically less than one minute.</p>
 </code></pre>
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/orders"</span>
   -H <span class="s2">"Authorization: my API key"</span>
+  -H <span class="s2">"Content-Type:application/json"</span> 
   -d @order.json 
-  --header <span class="s2">"Content-Type:application/json"</span> 
 </code></pre>
 
 <blockquote>
@@ -487,8 +487,8 @@ results in typically less than one minute.</p>
   </span><span class="nt">"color_text_field1"</span><span class="p">:</span><span class="w">  </span><span class="s2">"#333333"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"color_text_sign1"</span><span class="p">:</span><span class="w">   </span><span class="s2">"#3344ff"</span><span class="p">,</span><span class="w">
   </span><span class="nt">"callback_url"</span><span class="p">:</span><span class="w">       </span><span class="s2">"http://my-site.com/order_callback.php"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"client_data"</span><span class="p">:</span><span class="w">        </span><span class="s2">"my own ID"</span><span class="p">,</span><span class="w">
-</span><span class="err">}</span><span class="w">
+  </span><span class="nt">"client_data"</span><span class="p">:</span><span class="w">        </span><span class="s2">"my own ID"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>This endpoint posts an order to generate a set of banners based on a given template data.</p>
@@ -592,13 +592,13 @@ the <code class="prettyprint">client_data</code> string.</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rendering"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-     </span><span class="p">{</span><span class="w">
+    </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w">     </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w">   </span><span class="s2">"banner"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"980x240"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="p">,</span><span class="w">
-     </span><span class="err">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w">    </span><span class="s2">"http://orders.adrapid.com/:orderId/:itemId"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -698,13 +698,15 @@ and display them on the browser as they are completed.</p>
 <p>order_complete event:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-     </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"1234"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="w">
-     </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders.adrapid.com/:orderId/:itemId"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w">   </span><span class="s2">"banner"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="s2">"980x240"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <pre class="highlight javascript"><code><span class="c1">//</span>
@@ -792,15 +794,15 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 <blockquote>
 <p>upload a file by URL</p>
 </blockquote>
-<pre class="highlight shell"><code>curl http://test.adrapid.com/api/medias 
+<pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias 
   -H <span class="s2">"Authorization: my API key"</span> 
-  -F <span class="s2">"myfile=http://test.adrapid.com/uploads/client_uploads/demo/img/36b0_Camera1024x1024.png"</span>
+  -F <span class="s2">"myfile=http://mysite.com/myfile.png"</span>
 </code></pre>
 
 <blockquote>
 <p>upload a base64-encoded image</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://test.adrapid.com/api/medias"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/api/medias"</span>
   -H <span class="s2">"Authorization: my API key"</span> 
   -F <span class="s2">"myfile=data:image/png;base64,[...]"</span>
 </code></pre>
@@ -830,8 +832,8 @@ Use this API to upload files. The returned media ID can be used to track transco
 <p><code class="prettyprint">POST http://api.adrapid.com/medias/</code></p>
 
 <h2 id="crop">Crop</h2>
-<pre class="highlight shell"><code>curl test.adrapid.com/api/debug
-  -d <span class="s2">"image=http://my-site.com/my-image.jpg"</span> 
+<pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias
+  -d <span class="s2">"image=</span><span class="nv">$IMAGE_ID</span><span class="s2">"</span> 
   -d <span class="s2">"x=29.14%"</span> 
   -d <span class="s2">"y=18.52%"</span> 
   -d <span class="s2">"width=34.32%"</span> 
@@ -840,9 +842,7 @@ Use this API to upload files. The returned media ID can be used to track transco
 </code></pre>
 
 <p>Images can be cropped by suppling extra parameters to the <em>medias</em> method. The available parameters are listed in the table below. At least one parameter must be provided. 
-AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio.</p>
-
-<p>The values may be set as pixels or as a percentage.  </p>
+AdRapid does not enforce aspect ratio. If either width or height is omitted, the image will be cropped according to the original aspect ratio. The values may be set as pixels or as a percentage.  </p>
 
 <p>Thumbnails may be used, AdRapid will perform the cropping on the original image and return a thumbnail. This ensures maximum image quality, while avoiding sending unnecessarily much data to/from the client. </p>
 
