@@ -33,10 +33,44 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 
 ## Upload
 
+> upload a file
+
 ```shell
 curl http://api.adrapid.com/medias 
   -F test=@my-image.jpg 
   -H "Authorization: my API key"
+```
+
+> upload a file by URL
+
+```shell
+curl http://test.adrapid.com/api/medias 
+  -H "Authorization: my API key" 
+  -F "myfile=http://test.adrapid.com/uploads/client_uploads/demo/img/36b0_Camera1024x1024.png"
+```
+
+> upload a base64-encoded image
+
+```shell
+curl "http://test.adrapid.com/api/medias"
+  -H "Authorization: my API key" 
+  -F "myfile=data:image/png;base64,[...]"
+```
+
+> example result
+
+```json
+{
+  "myfile": {
+    "id":             1234,
+    "original":       "http://medias.adrapid.com/uploads/client/myfile.png",
+    "preview":        "http://medias.adrapid.com/uploads/client/myfile_preview.png",
+    "thumbnail":      "http://medias.adrapid.com/uploads/client/myfile_thumb.png",
+    "original_size":  "1024x1024",
+    "preview_size":   "600x600",
+    "thumb_size":     "240x240"
+  }
+}
 ```
 
 The medias API supports many different media formats. For the complete list please see table XX.
@@ -56,6 +90,7 @@ curl test.adrapid.com/api/debug
   -d "y=18.52%" 
   -d "width=34.32%" 
   -d "height=22.72%"
+  -H "Authorization: my API key"
 ```
 
 Images can be cropped by suppling extra parameters to the *medias* method. The available parameters are listed in the table below. At least one parameter must be provided. 

@@ -50,8 +50,10 @@ adrapid.sendOrder(order).then(function(orderId){
 ```
 
 ```shell
-curl -d @order.json --header "Content-Type:application/json" "http://api.adrapid.com/orders"
+curl "http://api.adrapid.com/orders"
   -H "Authorization: my API key"
+  -d @order.json 
+  --header "Content-Type:application/json" 
 ```
 
 > example order data
