@@ -795,16 +795,24 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 <p>upload a file by URL</p>
 </blockquote>
 <pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias 
-  -H <span class="s2">"Authorization: my API key"</span> 
   -F <span class="s2">"myfile=http://mysite.com/myfile.png"</span>
+  -H <span class="s2">"Authorization: my API key"</span> 
 </code></pre>
 
 <blockquote>
 <p>upload a base64-encoded image</p>
 </blockquote>
 <pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/api/medias"</span>
-  -H <span class="s2">"Authorization: my API key"</span> 
   -F <span class="s2">"myfile=data:image/png;base64,[...]"</span>
+  -H <span class="s2">"Authorization: my API key"</span> 
+</code></pre>
+
+<blockquote>
+<p>get an existing media by suppling it&rsquo;s ID</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"http://api.adrapid.com/api/medias"</span>
+  -F <span class="s2">"myfile=</span><span class="nv">$MEDIA_ID</span><span class="s2">"</span>
+  -H <span class="s2">"Authorization: my API key"</span> 
 </code></pre>
 
 <blockquote>
@@ -832,8 +840,25 @@ Use this API to upload files. The returned media ID can be used to track transco
 <p><code class="prettyprint">POST http://api.adrapid.com/medias/</code></p>
 
 <h2 id="crop">Crop</h2>
+
+<blockquote>
+<p>crop an existing media</p>
+</blockquote>
 <pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias
   -d <span class="s2">"image=</span><span class="nv">$IMAGE_ID</span><span class="s2">"</span> 
+  -d <span class="s2">"x=29.14%"</span> 
+  -d <span class="s2">"y=18.52%"</span> 
+  -d <span class="s2">"width=34.32%"</span> 
+  -d <span class="s2">"height=22.72%"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
+
+<blockquote>
+<p>upload multiple medias by entering URL:s, then crop them</p>
+</blockquote>
+<pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias
+  -d <span class="s2">"image=http://mysite.com/myimage.jpg"</span>
+  -d <span class="s2">"another_image=http://mysite.com/anoter_image.png"</span>
   -d <span class="s2">"x=29.14%"</span> 
   -d <span class="s2">"y=18.52%"</span> 
   -d <span class="s2">"width=34.32%"</span> 
@@ -850,7 +875,7 @@ AdRapid does not enforce aspect ratio. If either width or height is omitted, the
 
 <h3 id="parameters">Parameters</h3>
 
-<p>Parameters may be defined in pixels or as percentages.</p>
+<p>All parameters may be defined in either absolute pixels or relative using percentages (of the original image dimensions).</p>
 
 <table><thead>
 <tr>
@@ -875,6 +900,66 @@ AdRapid does not enforce aspect ratio. If either width or height is omitted, the
 <td>pixels/percentage of crop height</td>
 </tr>
 </tbody></table>
+
+<h2 id="transform">Transform</h2>
+
+<blockquote>
+<p>Upload an image and flip it vertically</p>
+</blockquote>
+<pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias
+  -d <span class="s2">"image=http://my-site.com/my-image.jpg"</span> 
+  -d <span class="s2">"transform=flip"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
+
+<blockquote>
+<p>Trim an existing image, then flip it vertically and horizontally</p>
+</blockquote>
+<pre class="highlight shell"><code>curl http://api.adrapid.com/api/medias
+  -d <span class="s2">"image=</span><span class="nv">$MY_IMAGE_ID</span><span class="s2">"</span> 
+  -d <span class="s2">"transform=trim,flip,flop"</span>
+  -H <span class="s2">"Authorization: my API key"</span>
+</code></pre>
+
+<p>Transformations can be applied to medias by supplying the <code class="prettyprint">transform</code> parameter in requests to the <code class="prettyprint">medias</code> method. Transformations can be applied to both new and existing medias. Transformations can be applied to multiple images at once by defining multiple images in the request. Multiple transformations can be applied at the same time by supplying multiple transformation parameters in the request, separated by commas. See the table below for a list of availabe transformations.</p>
+
+<h3 id="available-transform-parameters">Available transform parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>trim</td>
+<td>Trim whitespace around the image</td>
+</tr>
+<tr>
+<td>flip</td>
+<td>Flip the image horizontally</td>
+</tr>
+<tr>
+<td>flop</td>
+<td>Flip the image vertically</td>
+</tr>
+<tr>
+<td>rotate-90</td>
+<td>Rotate the image by 90 degrees</td>
+</tr>
+<tr>
+<td>rotate-180</td>
+<td>Rotate the image by 180 degrees</td>
+</tr>
+<tr>
+<td>rotate-270</td>
+<td>Rotate the image by 270 degrees</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Hint: transform operations are non-desctructive, meaning the original file is kept.
+</aside>
 
 <h2 id="progress">Progress</h2>
 
