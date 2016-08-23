@@ -45,16 +45,24 @@ curl http://api.adrapid.com/medias
 
 ```shell
 curl http://api.adrapid.com/api/medias 
-  -H "Authorization: my API key" 
   -F "myfile=http://mysite.com/myfile.png"
+  -H "Authorization: my API key" 
 ```
 
 > upload a base64-encoded image
 
 ```shell
 curl "http://api.adrapid.com/api/medias"
-  -H "Authorization: my API key" 
   -F "myfile=data:image/png;base64,[...]"
+  -H "Authorization: my API key" 
+```
+
+> get an existing media by suppling it's ID
+
+```shell
+curl "http://api.adrapid.com/api/medias"
+  -F "myfile=$MEDIA_ID"
+  -H "Authorization: my API key" 
 ```
 
 > example result
@@ -83,9 +91,24 @@ Use this API to upload files. The returned media ID can be used to track transco
 
 ## Crop
 
+> crop an existing media
+
 ```shell
 curl http://api.adrapid.com/api/medias
   -d "image=$IMAGE_ID" 
+  -d "x=29.14%" 
+  -d "y=18.52%" 
+  -d "width=34.32%" 
+  -d "height=22.72%"
+  -H "Authorization: my API key"
+```
+
+> upload multiple medias by entering URL:s, then crop them
+
+```shell
+curl http://api.adrapid.com/api/medias
+  -d "image=http://mysite.com/myimage.jpg"
+  -d "another_image=http://mysite.com/anoter_image.png"
   -d "x=29.14%" 
   -d "y=18.52%" 
   -d "width=34.32%" 
@@ -101,9 +124,8 @@ Thumbnails may be used, AdRapid will perform the cropping on the original image 
 Cropping parameters may be supplied when uploading medias to instantly crop the file(s) according to the rules specified. If multiple images are supplied in the same request, the cropping rules will be applied to all images supplied. To crop a previously uploaded image, supply the ID or URL for the image.
 
 
-
 ### Parameters
-Parameters may be defined in pixels or as percentages.
+All parameters may be defined in either absolute pixels or relative using percentages (of the original image dimensions).
 
 Parameter | Description
 --------- | -----------
@@ -111,6 +133,48 @@ x | pixels/percentage from the left side
 y | pixels/percentage from the left side
 width | pixels/percentage of crop width
 height | pixels/percentage of crop height
+
+
+
+## Transform
+
+> Upload an image and flip it vertically
+
+```shell
+curl http://api.adrapid.com/api/medias
+  -d "image=http://my-site.com/my-image.jpg" 
+  -d "transform=flip"
+  -H "Authorization: my API key"
+```
+
+> Trim an existing image, then flip it vertically and horizontally
+
+```shell
+curl http://api.adrapid.com/api/medias
+  -d "image=$MY_IMAGE_ID" 
+  -d "transform=trim,flip,flop"
+  -H "Authorization: my API key"
+```
+
+
+Transformations can be applied to medias by supplying the `transform` parameter in requests to the `medias` method. Transformations can be applied to both new and existing medias. Transformations can be applied to multiple images at once by defining multiple images in the request. Multiple transformations can be applied at the same time by supplying multiple transformation parameters in the request, separated by commas. See the table below for a list of availabe transformations.
+
+
+### Available transform parameters
+
+Parameter | Description
+--------- | -----------
+trim | Trim whitespace around the image
+flip | Flip the image horizontally
+flop | Flip the image vertically
+rotate-90 | Rotate the image by 90 degrees
+rotate-180 | Rotate the image by 180 degrees
+rotate-270 | Rotate the image by 270 degrees
+
+
+<aside class="success">
+Hint: transform operations are non-desctructive, meaning the original file is kept.
+</aside>
 
 
 
