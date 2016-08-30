@@ -81,13 +81,26 @@ curl "http://api.adrapid.com/api/medias"
 }
 ```
 
-The medias API supports many different media formats. For the complete list please see table XX.
+The medias API supports many different media formats. For a list of supported file formats, see the table below.
 The uploaded medias are transcoded to a format suitable to be previewed in a webpage.
 Several methods for sending files are provided. Files can be sent either as regular file upload, as an URL, or as base64-encoded strings. Several images may be uploaded in a single request. 
 Use this API to upload files. The returned media ID can be used to track transcoding process
 (see the *media progress* API).
 
 `POST http://api.adrapid.com/medias/`
+
+
+Supported image formats |
+---------
+jpg |
+png | 
+svg |
+eps |
+bmp |
+gif |
+pdf |
+ai  |
+
 
 ## Crop
 
