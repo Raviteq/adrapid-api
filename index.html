@@ -831,13 +831,44 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>The medias API supports many different media formats. For the complete list please see table XX.
+<p>The medias API supports many different media formats. For a list of supported file formats, see the table below.
 The uploaded medias are transcoded to a format suitable to be previewed in a webpage.
 Several methods for sending files are provided. Files can be sent either as regular file upload, as an URL, or as base64-encoded strings. Several images may be uploaded in a single request. 
 Use this API to upload files. The returned media ID can be used to track transcoding process
 (see the <em>media progress</em> API).</p>
 
 <p><code class="prettyprint">POST http://api.adrapid.com/medias/</code></p>
+
+<table><thead>
+<tr>
+<th>Supported image formats</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jpg</td>
+</tr>
+<tr>
+<td>png</td>
+</tr>
+<tr>
+<td>svg</td>
+</tr>
+<tr>
+<td>eps</td>
+</tr>
+<tr>
+<td>bmp</td>
+</tr>
+<tr>
+<td>gif</td>
+</tr>
+<tr>
+<td>pdf</td>
+</tr>
+<tr>
+<td>ai</td>
+</tr>
+</tbody></table>
 
 <h2 id="crop">Crop</h2>
 
