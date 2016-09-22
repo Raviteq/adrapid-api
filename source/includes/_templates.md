@@ -76,6 +76,15 @@ Hint: use the `group` property to filter templates client-side.
 `GET http://api.adrapid.com/templates`
 
 
+
+### Filtering templates
+
+Templates may be filtered to only include templates supporting a certain set of formats by apppending the `formats` querystring. 
+Multiple formats can be included in the formats string.
+
+Example: `GET http://api.adrapid.com/templates?formats=980x300,300x300`
+
+
 ## Getting rules for template
 
 ```javascript
