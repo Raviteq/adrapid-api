@@ -261,6 +261,13 @@ Hint: use the `group` property to filter templates client-side.
 
 <p><code class="prettyprint">GET http://api.adrapid.com/templates</code></p>
 
+<h3 id="filtering-templates">Filtering templates</h3>
+
+<p>Templates may be filtered to only include templates supporting a certain set of formats by apppending the <code class="prettyprint">formats</code> querystring. 
+Multiple formats can be included in the formats string.</p>
+
+<p>Example: <code class="prettyprint">GET http://api.adrapid.com/templates?formats=980x300,300x300</code></p>
+
 <h2 id="getting-rules-for-template">Getting rules for template</h2>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">adrapid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'adrapid'</span><span class="p">)({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'http://api.adrapid.com/'</span><span class="p">,</span>
