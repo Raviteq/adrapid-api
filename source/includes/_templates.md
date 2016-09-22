@@ -82,7 +82,8 @@ Hint: use the `group` property to filter templates client-side.
 Templates may be filtered to only include templates supporting a certain set of formats by apppending the `formats` querystring. 
 Multiple formats can be included in the formats string.
 
-Example: `GET http://api.adrapid.com/templates?formats=980x300,300x300`
+Example:
+`GET http://api.adrapid.com/templates?formats=980x300,300x300`
 
 
 ## Getting rules for template
@@ -190,6 +191,11 @@ Parameter | Description
 
 
 ## Get available formats
+
+```shell
+curl "http://api.adrapid.com/formats"
+  -H "Authorization: my API key"
+```
 
 Retreive a list of all available formats for all available templates.
 
