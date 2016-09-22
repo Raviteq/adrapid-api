@@ -180,6 +180,13 @@ Parameter | Description
 :id | The ID of template.
 
 
+## Get available formats
+
+Retreive a list of all available formats for all available templates.
+
+`GET http://api.adrapid.com/formats`
+
+
 ## Retrieving template preview
 
 It is also possible to retrieve a quick preview of a template before actually sending
