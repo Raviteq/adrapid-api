@@ -208,6 +208,13 @@ Parameter |  Description
 id        | id of the order we want to retrieve its data.
 
 
+
+### Get order data
+Retreives the values (texts, colors and images) used in a certain order.
+
+`GET http://api.adrapid.com/orders/:id/data`
+
+
 ## Get embed code
 
 ```javascript
