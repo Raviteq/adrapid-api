@@ -21,7 +21,7 @@ search: true
 
 # Introduction
 
-This is the [AdRapid](http://www.adrapid.com) public API v1.0 documentation
+This is the [AdRapid](http://www.adrapid.com) public API v2.0 documentation
 
 ### API URL
 The base URL for all API requests is `http://api.adrapid.com/`. A set of public
