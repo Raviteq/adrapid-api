@@ -27,11 +27,6 @@ This is the [AdRapid](http://www.adrapid.com) public API v2.0 documentation
 The base URL for all API requests is `http://api.adrapid.com/`. A set of public
 methods are available as specified in this document.
 
-### Implementation examples
-A set of example implementations is available in the [AdRapid API examples](https://github.com/Raviteq/AdRapid-API-examples) repository. The javascript examples in this document is using the AdRapid wrapper available in this repository.
-
-A separate library for frontend helpers is also available in the repository. Feel free to clone the repo, play around with it and pick out the best parts for your use-case.
-
 
 ### Basic description of the order workflow
 `AdRapid` is a rendering platform used for rendering a variety of `ads`. It supports
