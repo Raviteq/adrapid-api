@@ -24,18 +24,16 @@ search: true
 This is the [AdRapid](http://www.adrapid.com) public API v2.0 documentation
 
 ### API URL
-The base URL for all API requests is `http://api.adrapid.com/`. A set of public
+The URL endpoint for all API requests is `https://api.adrapid.com/`. A set of public
 methods are available as specified in this document.
 
 
 ### Basic description of the order workflow
-`AdRapid` is a rendering platform used for rendering a variety of `ads`. It supports
-a number of different *ad types* - such as *html5 banners*, *flash banners*, *video*,
-as well as *print material*.
+`AdRapid` is a rendering platform used for rendering *html5 banners* in a variety of formats.
 
 The rendering platform is based around a concept of `clients`, `templates` and `orders`.
 
-Every `client` has access to a given set of `templates`. A `template` describes the
+Every `client` has access to a set of `templates`. A `template` describes the
 overall layout of an ad. A template also contains a set of available `ad formats`,
 for different types of ads as listed above. The end user supplies texts, images and
 colors, as well as the desired `ad formats`, resulting in an `order`.
@@ -49,6 +47,9 @@ may also be sent to an URL of choice, if specified in the order request.
 
 
 # Authentication
+
+TODO: add description for API tokens, available throught account>API keys
+
 
 > To authorize, use this code:
 
