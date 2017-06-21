@@ -211,6 +211,8 @@ Retreives the values (texts, colors and images) used in a certain order.
 
 ## Get embed code
 
+<aside class="warning">Currently not implemented in API v2</aside>
+
 ```javascript
 var adrapid = require('adrapid')({
   url: 'http://api.adrapid.com/',
@@ -233,19 +235,7 @@ curl "http://api.adrapid.com/get_item_content/$MY_ITEM_ID"
 > The above command returns an JSON array, the property `preview` contains HTML for the selected order item.
 
 ```html
-<div class="embed-container">
-  <iframe 
-    id="iframe_result"
-    src="http://test.adrapid.com/pcdn/327/15970/54233/970x250.html"
-    width="970"
-    height="250"
-    style="width: 970px; height: 250px; border: none;"
-    border="0"
-    frameBorder="0"
-    scrolling="no"
-    seamless="seamless"
-  ></iframe>
-</div>
+TODO
 ```
 
 Get the embed HTML for an order item. Since different ad types requires different embed code, we provide this method for easily getting the content of an order item.
