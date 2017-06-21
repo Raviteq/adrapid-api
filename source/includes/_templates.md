@@ -90,8 +90,19 @@ order | name | Sorting
 formats | | Require the specified format(s)
 
 
+#### Sorting columns
+Templates can be sorted by the following templates, in either ascending or descending order 
+
+Parameter | Description
+---------- | ----------
+name | Template name (default)
+createdAt | Creation date
+updatedAt | Date last modified
+id | Unique UUID
+
+
 Example:
-`GET http://api.adrapid.com/templates?name=City&formats=980x300,300x300`
+`GET http://api.adrapid.com/templates?name=City&formats=980x300,300x300&order=updatedAt`
 
 
 ## Getting rules for template
