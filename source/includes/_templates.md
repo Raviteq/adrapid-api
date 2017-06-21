@@ -32,27 +32,26 @@ adrapid.templates().then(function(templates){
 > Example result of calling the get templates method
 
 ```json
-[{
-  "id":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "name":       "AdRapid product 1",
-  "identifier": "adrapid-product00001",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "product"
-},
 {
-  "id":         "snowwq97a0l2fdabeb02a79e877bb9bda7e502ae",
-  "name":       "Product snow",
-  "identifier": "mxm-product_snow",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "product"
-},
-{
-  "id":         "service-image_xbeb02a79e877bb9bda7e502ae",
-  "name":       "Service image",
-  "identifier": "mxm-service_image",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "real_estate"
-}]
+  "count": 3,
+  "rows": [
+    {
+      "id": "b5147d54-9666-40fa-85f1-90d62c2356df",
+      "name": "City",
+      "data": {...}
+    },
+    {
+      "id": "02ce42ed-2d5e-49a9-87fc-36b3da6b9e3b",
+      "name": "Multicar",
+      "data": {...}
+    },
+    {
+      "id": "4cbd59ef-cf43-4c44-9866-f55ac2201a0a",
+      "name": "Product",
+      "data": {...},
+    }
+  ]
+}
 ```
 
 Get available templates for a given client. Returns a list of available templates for the client with the supplied `public API key`.
