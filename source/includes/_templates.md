@@ -119,56 +119,7 @@ curl "http://api.adrapid.com/templates/$TEMPLATE_ID"
 > Example result of calling the get template rules method
 
 ```json
-{
-   "id":    "6066cd7b8712507a5b0d547aa64c370a91ac3f91",
-   "name":  "demo-phones",
-   "formats": [
-      "120x600",
-      "160x600",
-      "200x200",
-      "240x400"
-   ],
-   "fields":[
-      {
-         "name":        "text_field1_1",
-         "label":       "Product name",
-         "type":        "text",
-         "max_length":  20,
-         "default":     "AdRapid Phone"
-      },
-      {
-         "name":        "text_sign2_1",
-         "label":       "Price",
-         "type":        "text",
-         "max_length":  6,
-         "default":     "$399"
-      },
-      {
-         "name":        "img_1",
-         "label":       "Product image",
-         "type":        "image",
-         "default":     "http://adrapid.com/image.png"
-      },
-      {
-         "name":        "img_2",
-         "label":       "Product logo",
-         "type":        "image",
-         "default":     "http://adrapid.com/image.png"
-      },
-      {
-         "name":        "color_background1",
-         "label":       "Background color",
-         "type":        "color",
-         "default":     "#b8594c"
-      },
-      {
-         "name":        "color_texts",
-         "label":       "Text color",
-         "type":        "color",
-         "default":     "#ffffff"
-      }
-   ]
-}
+TODO: add example content for API v2
 ```
 
 Get the rules for a given template. The rules of a template defines which datatypes are allowed for every field available in the template (texts, images, colors), as well as the supported output formats.
