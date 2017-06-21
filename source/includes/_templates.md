@@ -78,11 +78,20 @@ Hint: use the `group` property to filter templates client-side.
 
 ### Filtering templates
 
-Templates may be filtered to only include templates supporting a certain set of formats by apppending the `formats` querystring. 
-Multiple formats can be included in the formats string.
+Templates can be filtered to only include templates matching the given search parameters. The number of templates may also be limited, and there is also the option to specify the sorting order.
+
+
+Parameter | Default | Description
+--------- | ------- |-----------
+name | | Template name (case-insensitive)
+limit | 100 |  Maximum number of templates to return
+offset | 0 | Offset from start
+order | name | Sorting
+formats | | Require the specified format(s)
+
 
 Example:
-`GET http://api.adrapid.com/templates?formats=980x300,300x300`
+`GET http://api.adrapid.com/templates?name=City&formats=980x300,300x300`
 
 
 ## Getting rules for template
