@@ -10,7 +10,7 @@ send orders based on the given template.
 
 ```shell
 curl "http://api.adrapid.com/templates"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 ```javascript
@@ -32,27 +32,26 @@ adrapid.templates().then(function(templates){
 > Example result of calling the get templates method
 
 ```json
-[{
-  "id":         "qual3097a002fdaeeb02a79e877bb9bda7e502ae",
-  "name":       "AdRapid product 1",
-  "identifier": "adrapid-product00001",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "product"
-},
 {
-  "id":         "snowwq97a0l2fdabeb02a79e877bb9bda7e502ae",
-  "name":       "Product snow",
-  "identifier": "mxm-product_snow",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "product"
-},
-{
-  "id":         "service-image_xbeb02a79e877bb9bda7e502ae",
-  "name":       "Service image",
-  "identifier": "mxm-service_image",
-  "thumbnail":  "http://adrapid.com/thumbnail.jpg",
-  "group":      "real_estate"
-}]
+  "count": 3,
+  "rows": [
+    {
+      "id": "b5147d54-9666-40fa-85f1-90d62c2356df",
+      "name": "City",
+      "data": {...}
+    },
+    {
+      "id": "02ce42ed-2d5e-49a9-87fc-36b3da6b9e3b",
+      "name": "Multicar",
+      "data": {...}
+    },
+    {
+      "id": "4cbd59ef-cf43-4c44-9866-f55ac2201a0a",
+      "name": "Product",
+      "data": {...}
+    }
+  ]
+}
 ```
 
 Get available templates for a given client. Returns a list of available templates for the client with the supplied `public API key`.
@@ -61,15 +60,7 @@ For each template, a `template ID`, `identifier`, `name` and `thumbnail` is supp
 
 The `name` and `identifier` fields contain names of the template, which you may use internally as you wish - ie. for identifying templates or displaying readable template names to the end user.
 
-The `thumbnail` field contains a URL to a jpeg image which may be used for displaying a overview of the template in your UI.
-
-The `group` property describes the `content-type` required for the template. Our templates are designed for different use cases - for example, the fields/content required in a template for real estate ads will differ from the fields required in a template for producing online product ads.
-
 To get the rules for a specific template, call the `template rules` method, supplying the `template ID` to the method call.
-
-<aside class="success">
-Hint: use the `group` property to filter templates client-side. 
-</aside>
 
 ### HTTP Request
 
@@ -79,11 +70,31 @@ Hint: use the `group` property to filter templates client-side.
 
 ### Filtering templates
 
-Templates may be filtered to only include templates supporting a certain set of formats by apppending the `formats` querystring. 
-Multiple formats can be included in the formats string.
+Templates can be filtered to only include templates matching the given search parameters. The number of templates may also be limited, and there is also the option to specify the sorting order.
+
+
+Parameter | Default | Description
+--------- | ------- |-----------
+name | | Template name (case-insensitive)
+limit | 100 |  Maximum number of templates to return
+offset | 0 | Offset from start
+order | name | Sorting
+formats | | Require the specified format(s)
+
+
+### Sorting templates
+Templates can be sorted by the following columns, in either ascending or descending order.
+
+Parameter | Description
+---------- | ----------
+name | Template name (default)
+createdAt | Creation date
+updatedAt | Date last modified
+id | Unique UUID
+
 
 Example:
-`GET http://api.adrapid.com/templates?formats=980x300,300x300`
+`GET http://api.adrapid.com/templates?name=City&formats=980x300,300x300&order=updatedAt`
 
 
 ## Getting rules for template
@@ -105,67 +116,16 @@ adrapid.rules(templateId).then(function(rules){
 
 ```shell
 curl "http://api.adrapid.com/templates/$TEMPLATE_ID"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > Example result of calling the get template rules method
 
 ```json
-{
-   "id":    "6066cd7b8712507a5b0d547aa64c370a91ac3f91",
-   "name":  "demo-phones",
-   "formats": [
-      "120x600",
-      "160x600",
-      "200x200",
-      "240x400"
-   ],
-   "fields":[
-      {
-         "name":        "text_field1_1",
-         "label":       "Product name",
-         "type":        "text",
-         "max_length":  20,
-         "default":     "AdRapid Phone"
-      },
-      {
-         "name":        "text_sign2_1",
-         "label":       "Price",
-         "type":        "text",
-         "max_length":  6,
-         "default":     "$399"
-      },
-      {
-         "name":        "img_1",
-         "label":       "Product image",
-         "type":        "image",
-         "default":     "http://adrapid.com/image.png"
-      },
-      {
-         "name":        "img_2",
-         "label":       "Product logo",
-         "type":        "image",
-         "default":     "http://adrapid.com/image.png"
-      },
-      {
-         "name":        "color_background1",
-         "label":       "Background color",
-         "type":        "color",
-         "default":     "#b8594c"
-      },
-      {
-         "name":        "color_texts",
-         "label":       "Text color",
-         "type":        "color",
-         "default":     "#ffffff"
-      }
-   ]
-}
+TODO: add example content for API v2
 ```
 
 Get the rules for a given template. The rules of a template defines which datatypes are allowed for every field available in the template (texts, images, colors), as well as the supported output formats.
-
-Rules for maximum text length (total characters) is supplied for every text field.
 
 Images are resized to optimally fit the provided image area when rendering every banner, however, an optimal ratio is supplied in the rules for image fields. Images should preferably be provided in the largest resolution possible, especially when producing ads for printed materials.
 
@@ -180,7 +140,7 @@ color | A valid color specification
 
 ### HTTP Request
 
-`GET http://api.adrapid.com/templates/:id/rules`
+`GET http://api.adrapid.com/templates/:id`
 
 
 ### URL parameters
@@ -194,7 +154,7 @@ Parameter | Description
 
 ```shell
 curl "http://api.adrapid.com/formats"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 Retreive a list of all available formats for all available templates.
@@ -204,12 +164,13 @@ Retreive a list of all available formats for all available templates.
 
 ## Retrieving template preview
 
+<aside class="warning">Currently not implemented in API v2</aside>
+
 It is also possible to retrieve a quick preview of a template before actually sending
 a time consuming order.
 
 Returns a html preview.
 
-<aside class="warning">Currently autentication is not implemented.</aside>
 
 ### HTTP Request
 
