@@ -44,7 +44,7 @@ curl http://api.adrapid.com/medias
 > upload a file by URL
 
 ```shell
-curl http://api.adrapid.com/api/medias 
+curl http://api.adrapid.com/medias 
   -F "myfile=http://mysite.com/myfile.png"
   -H "Authorization: my API key" 
 ```
@@ -103,6 +103,7 @@ ai  |
 
 
 ## Crop
+TODO: needs update to API
 
 > crop an existing media
 
@@ -150,6 +151,10 @@ height | pixels/percentage of crop height
 
 
 ## Transform
+
+<aside class="warning">
+Transformations are not currently supported in API v2.
+</aside>
 
 > Upload an image and flip it vertically
 
@@ -199,3 +204,7 @@ The progress is reported as an Integer ranging from 0 to 100.
 ### SSE Endpoint
 
 `http://api.adrapid.com/medias/:id/`
+
+
+## Delete
+TODO
