@@ -48,7 +48,7 @@ adrapid.templates().then(function(templates){
     {
       "id": "4cbd59ef-cf43-4c44-9866-f55ac2201a0a",
       "name": "Product",
-      "data": {...},
+      "data": {...}
     }
   ]
 }
@@ -60,15 +60,7 @@ For each template, a `template ID`, `identifier`, `name` and `thumbnail` is supp
 
 The `name` and `identifier` fields contain names of the template, which you may use internally as you wish - ie. for identifying templates or displaying readable template names to the end user.
 
-The `thumbnail` field contains a URL to a jpeg image which may be used for displaying a overview of the template in your UI.
-
-The `group` property describes the `content-type` required for the template. Our templates are designed for different use cases - for example, the fields/content required in a template for real estate ads will differ from the fields required in a template for producing online product ads.
-
 To get the rules for a specific template, call the `template rules` method, supplying the `template ID` to the method call.
-
-<aside class="success">
-Hint: use the `group` property to filter templates client-side. 
-</aside>
 
 ### HTTP Request
 
@@ -90,8 +82,8 @@ order | name | Sorting
 formats | | Require the specified format(s)
 
 
-#### Sorting columns
-Templates can be sorted by the following templates, in either ascending or descending order 
+### Sorting templates
+Templates can be sorted by the following columns, in either ascending or descending order.
 
 Parameter | Description
 ---------- | ----------
@@ -135,8 +127,6 @@ TODO: add example content for API v2
 
 Get the rules for a given template. The rules of a template defines which datatypes are allowed for every field available in the template (texts, images, colors), as well as the supported output formats.
 
-Rules for maximum text length (total characters) is supplied for every text field.
-
 Images are resized to optimally fit the provided image area when rendering every banner, however, an optimal ratio is supplied in the rules for image fields. Images should preferably be provided in the largest resolution possible, especially when producing ads for printed materials.
 
 
@@ -150,7 +140,7 @@ color | A valid color specification
 
 ### HTTP Request
 
-`GET http://api.adrapid.com/templates/:id/rules`
+`GET http://api.adrapid.com/templates/:id`
 
 
 ### URL parameters
@@ -174,12 +164,13 @@ Retreive a list of all available formats for all available templates.
 
 ## Retrieving template preview
 
+<aside class="warning">Currently not implemented in API v2</aside>
+
 It is also possible to retrieve a quick preview of a template before actually sending
 a time consuming order.
 
 Returns a html preview.
 
-<aside class="warning">Currently autentication is not implemented.</aside>
 
 ### HTTP Request
 
