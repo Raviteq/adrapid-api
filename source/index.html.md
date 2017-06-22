@@ -29,7 +29,7 @@ methods are available as described in this document.
 
 
 ### Description of order workflow
-`AdRapid` is a ad creation platform used for producing *html5 banners* as well as ads for print. The platform uses a concept of `users`, `templates` and `banners`. Each `user` has access to a given set of `templates`. A `template` describes the overall layout and animations of an ad. A template contains a set of available `ad formats`, for different types of ads. The user supplies texts, images and colors, as well as the desired `ad formats`, thereby creating an `order`. The resulting order is sent to AdRapid and the resulting `banners` are produced and returned to the user.
+`AdRapid` is a ad creation platform used for producing *html5 banners* as well as ads for print. The platform uses a concept of `users`, `templates` and `banners`. Each user has access to a given set of template. A template describes the overall layout and animations of an ad. A template contains a set of available `ad formats`, for different types of ads. The user supplies texts, images and colors, as well as the desired ad formats, thereby creating an `order`. The resulting order is sent to AdRapid and the resulting `banners` are produced and returned to the user.
 
 
 # Authentication
@@ -63,10 +63,7 @@ authentication for most of the API methods.
 
 You can register for a new AdRapid API key at our [developer portal](http://adrapid.com/developers).
 
-<aside class="warning">Autentication is disabled for the `adrapiddemo` account - only the `public key` needs to be provided.</aside>
-
 <aside class="notice">
 You must replace <code>my API Key</code> and <code>my secret token</code> with your
 personal API key and token respectively.
 </aside>
-
