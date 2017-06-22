@@ -51,7 +51,7 @@ adrapid.sendOrder(order).then(function(orderId){
 
 ```shell
 curl "http://api.adrapid.com/orders"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
   -H "Content-Type:application/json" 
   -d @order.json 
 ```
@@ -169,7 +169,7 @@ adrapid.getOrder(orderId).then(function(order){
 
 ```shell
 curl "http://api.adrapid.com/orders/$MY_ORDER_ID"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > The above command returns JSON structured like this:
@@ -229,7 +229,7 @@ adrapid.getPreview(itemId).then(function(result){
 
 ```shell
 curl "http://api.adrapid.com/get_item_content/$MY_ITEM_ID"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > The above command returns an JSON array, the property `preview` contains HTML for the selected order item.

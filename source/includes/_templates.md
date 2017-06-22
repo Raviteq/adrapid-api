@@ -10,7 +10,7 @@ send orders based on the given template.
 
 ```shell
 curl "http://api.adrapid.com/templates"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 ```javascript
@@ -116,7 +116,7 @@ adrapid.rules(templateId).then(function(rules){
 
 ```shell
 curl "http://api.adrapid.com/templates/$TEMPLATE_ID"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > Example result of calling the get template rules method
@@ -154,7 +154,7 @@ Parameter | Description
 
 ```shell
 curl "http://api.adrapid.com/formats"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 Retreive a list of all available formats for all available templates.

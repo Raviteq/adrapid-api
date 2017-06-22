@@ -38,7 +38,7 @@ Hint: dynamically generate a thumbnail in any size using URL formatted like `htt
 ```shell
 curl http://api.adrapid.com/medias 
   -F test=@my-image.jpg 
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > upload a file by URL
@@ -46,7 +46,7 @@ curl http://api.adrapid.com/medias
 ```shell
 curl http://api.adrapid.com/medias 
   -F "myfile=http://mysite.com/myfile.png"
-  -H "Authorization: my API key" 
+  -H "Authorization: my API token"
 ```
 
 > upload a base64-encoded image
@@ -54,7 +54,7 @@ curl http://api.adrapid.com/medias
 ```shell
 curl "http://api.adrapid.com/api/medias"
   -F "myfile=data:image/png;base64,[...]"
-  -H "Authorization: my API key" 
+  -H "Authorization: my API token"
 ```
 
 > get an existing media by suppling it's ID
@@ -62,7 +62,7 @@ curl "http://api.adrapid.com/api/medias"
 ```shell
 curl "http://api.adrapid.com/api/medias"
   -F "myfile=$MEDIA_ID"
-  -H "Authorization: my API key" 
+  -H "Authorization: my API token"
 ```
 
 > example result
@@ -114,7 +114,7 @@ curl http://api.adrapid.com/api/medias
   -d "y=18.52%" 
   -d "width=34.32%" 
   -d "height=22.72%"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > upload multiple medias by entering URL:s, then crop them
@@ -127,7 +127,7 @@ curl http://api.adrapid.com/api/medias
   -d "y=18.52%" 
   -d "width=34.32%" 
   -d "height=22.72%"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 Images can be cropped by suppling extra parameters to the *medias* method. The available parameters are listed in the table below. At least one parameter must be provided. 
@@ -162,7 +162,7 @@ Transformations are not currently supported in API v2.
 curl http://api.adrapid.com/api/medias
   -d "image=http://my-site.com/my-image.jpg" 
   -d "transform=flip"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 > Trim an existing image, then flip it vertically and horizontally
@@ -171,7 +171,7 @@ curl http://api.adrapid.com/api/medias
 curl http://api.adrapid.com/api/medias
   -d "image=$MY_IMAGE_ID" 
   -d "transform=trim,flip,flop"
-  -H "Authorization: my API key"
+  -H "Authorization: my API token"
 ```
 
 
